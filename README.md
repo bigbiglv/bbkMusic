@@ -11,7 +11,7 @@ npm run dev
 
 #### 第三方库
 
-* `less`
+* `sess`
 * `pinai`状态管理
 * `vue-router`路由管理
 * `unplugin-vue-components`组件自动引入
