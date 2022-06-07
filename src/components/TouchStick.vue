@@ -38,8 +38,8 @@ function handleTouchEnd(){
 
 const cartStyle = computed(()=>{
   //随着cartState.offsetX Y的数值越大，x y的值增幅越小
-  let transform = `translate(${-cartState.offsetX * 0.05}px, ${-cartState.offsetY * 0.05}px)` 
-  let transformOrigin = `${cartState.offsetX > 0 ? 0 : '100%'} ${cartState.offsetY > 0 ? 0 : '100%'}`
+  let transform = `scale(${1 + Math.abs(cartState.offsetX) * 0.0001},${1 + Math.abs(cartState.offsetY) * 0.0001}) translate(${-cartState.offsetX * 0.05}px, ${-cartState.offsetY * 0.05}px) ` 
+  let transformOrigin = `${cartState.offsetX < 0 ? 0 : '100%'} ${cartState.offsetY < 0 ? 0 : '100%'}`
   return {
     transform,
     transformOrigin,
