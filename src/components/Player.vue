@@ -28,7 +28,8 @@ watch(currentIndex, (newVal) => {
     id="appAudio" 
     controls 
     @timeupdate="store.listenTimeUpdate()"
-    @loadedmetadata="store.listenLoadedmetadata()"
+    @canplay="store.listenCanplay()"
+    
   />
 </template>
 
