@@ -11,11 +11,12 @@ npm run dev
 
 #### 第三方库
 
-* `sess`
+* `scss`
 * `pinai`状态管理
 * `vue-router`路由管理
 * `unplugin-vue-components`组件自动引入
-* `unplugin-icons`[图标库](https://icones.js.org/)，自动引入 
+* `unplugin-icons`[图标库](https://icones.js.org/)，按需自动引入 
+* `vant`ui组件库，按需自动引入
 * `vue-grid-layout` 移入到本地成为本地组件
 * 
 #### git commit 规范
