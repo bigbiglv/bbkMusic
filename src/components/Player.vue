@@ -19,10 +19,17 @@ watch(currentIndex, (newVal) => {
   store.playByIndex(newVal)
 })
 
+
+
 </script>
 
 <template>
-  <audio id="appAudio" controls  />
+  <audio 
+    id="appAudio" 
+    controls 
+    @timeupdate="store.listenTimeUpdate()"
+    @loadedmetadata="store.listenLoadedmetadata()"
+  />
 </template>
 
 

@@ -4,19 +4,17 @@ export default defineStore('audioStore', {
   state: () => {
     return {
       audioEl: null as HTMLAudioElement | null,
-      //是否暂停
-      isPause: true,
-      //播放列表
-      playList: [] as string[],
-      //当前播放的音乐的下标
-      currentIndex: 0,
+      isPause: true,   //是否暂停
+      playList: [] as string[],  //播放列表
+      currentIndex: 0, //当前播放的音乐的下标
+      duration: 0,     //当前播放音乐的总时长
+      progress: 0,     //当前播放音乐的进度
+      isLoop: false,   //是否循环播放
+      isMute: false,   //是否静音
+      volume: 1,       //音量
     }
   },
   getters: {
-    //当前播放的链接
-    audioSrc(state){
-      return state.audioEl?.src
-    },
   },
   actions:{
     //播放音频
@@ -63,6 +61,19 @@ export default defineStore('audioStore', {
         this.audioEl.src = this.playList[index]
         this.currentIndex = index
       }
-    }
+    },
+    //监听音频加载完成
+    listenLoadedmetadata(){
+      if(this.audioEl){
+        console.log('listenLoadedmetadata', this.audioEl.duration)
+      }
+    },
+    //监听音频进度
+    listenTimeUpdate(){
+      if(this.audioEl){
+        this.progress = this.audioEl.currentTime
+      }
+    },
+
   }
 })
