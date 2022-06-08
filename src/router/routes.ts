@@ -1,6 +1,7 @@
 import Home from '../views/Home/index.vue'
 import Category from '../views/Category/index.vue'
 import NotFound from '../views/Error/404.vue'
+import Login from '../views/Login/index.vue'
 interface IRoute {
   path: string
   name: string
@@ -39,6 +40,15 @@ export const routes: IRoute[] = [
       keepAlive: true,
       title: '分类',
       tabbar: true
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: {
+      keepAlive: true,
+      title: '登录'
     }
   }
 ]
