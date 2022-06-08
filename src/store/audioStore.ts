@@ -62,10 +62,10 @@ export default defineStore('audioStore', {
         this.currentIndex = index
       }
     },
-    //监听音频加载完成
-    listenLoadedmetadata(){
+    //监听音频可以播放
+    listenCanplay(){
       if(this.audioEl){
-        console.log('listenLoadedmetadata', this.audioEl.duration)
+        this.duration = this.audioEl.duration
       }
     },
     //监听音频进度
