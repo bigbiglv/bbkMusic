@@ -4,8 +4,6 @@ import Player from '@/components/Player.vue';
 </script>
 
 <template>
-  <!-- <router-view /> -->
-
   <router-view>
     <template #default="{ Component, route }">
       <transition name="fade-slide" mode="out-in" appear>
@@ -21,7 +19,7 @@ import Player from '@/components/Player.vue';
 <style>
 .fade-slide-leave-active,
 .fade-slide-enter-active {
-  transition: all 0.3s;
+  transition: all 0.25s;
 }
 
 .fade-slide-enter-from {
