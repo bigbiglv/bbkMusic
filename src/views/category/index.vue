@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  category
+  <div>
+    category
+  </div>
 </template>
 
 
