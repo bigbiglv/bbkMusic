@@ -1,7 +1,7 @@
-import Home from '../views/Home/index.vue'
-import Category from '../views/Category/index.vue'
-import NotFound from '../views/Error/404.vue'
-import Login from '../views/Login/index.vue'
+import Home from '@/views/Home/index.vue'
+import Category from '@/views/Category/index.vue'
+import NotFound from '@/views/Error/404.vue'
+import Login from '@/views/Login/index.vue'
 interface IRoute {
   path: string
   name: string
