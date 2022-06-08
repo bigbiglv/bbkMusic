@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { join } from "path"
 import Components from 'unplugin-vue-components/vite'
+//vant解析库
+import { VantResolver } from 'unplugin-vue-components/resolvers'
 //icon
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
@@ -12,6 +14,7 @@ export default defineConfig({
     Components({
       // 解析的ui库
       resolvers: [
+        VantResolver(),
         IconsResolver({
           prefix: 'icon', // 自动引入的Icon组件统一前缀，默认为 i，设置false为不需要前缀
           // {prefix}-{collection}-{icon} 使用组件解析器时，您必须遵循名称转换才能正确推断图标。

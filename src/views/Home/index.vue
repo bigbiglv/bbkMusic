@@ -4,7 +4,6 @@ import TouchStick from '../../components/TouchStick.vue';
 
 <template>
   <div>
-
     <TouchStick>
       123
     </TouchStick>

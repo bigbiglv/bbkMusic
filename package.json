@@ -11,6 +11,7 @@
     "@vueuse/core": "^8.6.0",
     "esbuild-windows-64": "^0.14.42",
     "pinia": "^2.0.14",
+    "vant": "^3.5.0",
     "vue": "^3.2.25",
     "vue-router": "4"
   },
