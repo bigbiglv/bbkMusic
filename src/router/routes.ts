@@ -1,5 +1,6 @@
 import Home from '../views/Home/index.vue'
 import Category from '../views/Category/index.vue'
+import NotFound from '../views/Error/404.vue'
 interface IRoute {
   path: string
   name: string
@@ -12,6 +13,14 @@ interface IRoute {
   children?: IRoute[]
 }
 export const routes: IRoute[] = [
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    meta:{
+      title: '错误页',
+    },
+    component: NotFound
+  },
   {
     path: '/',
     name: 'home',
