@@ -12,6 +12,7 @@ export default defineStore('audioStore', {
       isLoop: false,   //是否循环播放
       isMute: false,   //是否静音
       volume: 1,       //音量
+      isDrag: false,   //是否正在拖拽进度条
     }
   },
   getters: {
@@ -33,6 +34,9 @@ export default defineStore('audioStore', {
         'http://music.163.com/song/media/outer/url?id=413861.mp3'
       ]
       this.playByIndex(0)
+    },
+    setDrag(isDrag: boolean){
+      this.isDrag = isDrag
     },
     // region 控制方法
     //播放音频
@@ -101,7 +105,8 @@ export default defineStore('audioStore', {
     },
     //监听音频进度
     listenTimeUpdate(){
-      if(this.audioEl){
+      if(this.audioEl && !this.isDrag){
+        console.log('监听音频进度')
         this.progress = this.audioEl.currentTime
       }
     },
