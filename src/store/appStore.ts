@@ -4,6 +4,9 @@ export default defineStore('appStore', {
     return {
       playBarHeight: 50,
       showTabBar: true,
+      //是否显示歌词遮罩
+      showLrcMask: false,
+
     }
   },
   getters: {

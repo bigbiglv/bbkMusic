@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
     PlayBar: typeof import('./src/components/PlayBar.vue')['default']
     Player: typeof import('./src/components/Player.vue')['default']
+    PlayerLyrics: typeof import('./src/components/PlayerLyrics.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Tabbar: typeof import('./src/components/Tabbar.vue')['default']
