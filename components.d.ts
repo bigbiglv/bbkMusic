@@ -5,7 +5,9 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    IconBxsBuildingHouse: typeof import('~icons/bxs/building-house')['default']
     IconBxsCaretRightCircle: typeof import('~icons/bxs/caret-right-circle')['default']
+    IconBxsPauseCircle: typeof import('~icons/bxs/pause-circle')['default']
     IconBxsSkipNextCircle: typeof import('~icons/bxs/skip-next-circle')['default']
     IconBxsSkipPreviousCircle: typeof import('~icons/bxs/skip-previous-circle')['default']
     IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']

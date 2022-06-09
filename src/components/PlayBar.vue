@@ -5,7 +5,7 @@ import appStore from '@/store/appStore';
 
 const storeAudio = audioStore();
 const storeApp = appStore();
-const { showTime, showDuration, duration, progress } = storeToRefs(storeAudio)
+const { isPause, showTime, showDuration, duration, progress } = storeToRefs(storeAudio)
 const { playBarHeight, tabBarHeight } = storeToRefs(storeApp)
 
 function dragEnd(){
@@ -27,7 +27,10 @@ function dragEnd(){
     {{showDuration}}
     <div class="icon">
       <icon-bxs-skip-previous-circle @click="storeAudio.prev"/>
-      <icon-bxs-caret-right-circle @click="storeAudio.play"/>
+
+      <icon-bxs-caret-right-circle @click="storeAudio.play" v-show="isPause"/>
+      <icon-bxs-building-house @click="storeAudio.pause" v-show="!isPause"/>
+      
       <icon-bxs-skip-next-circle @click="storeAudio.next"/>
     </div>
   </div>
