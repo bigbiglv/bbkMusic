@@ -2,6 +2,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import audioStore from '@/store/audioStore'
+
 const store = audioStore()
 let { audioEl, currentIndex, isLoop } = storeToRefs(store)
 
