@@ -25,6 +25,16 @@ export default defineStore('audioStore', {
     }
   },
   actions:{
+    //获取播放列表
+    getPlayList(){
+      this.playList = [
+        'http://music.163.com/song/media/outer/url?id=413859.mp3',
+        'http://music.163.com/song/media/outer/url?id=413860.mp3',
+        'http://music.163.com/song/media/outer/url?id=413861.mp3'
+      ]
+      this.playByIndex(0)
+    },
+    // region 控制方法
     //播放音频
     play(){
       if(this.audioEl){
@@ -39,15 +49,6 @@ export default defineStore('audioStore', {
         this.isPause = true
       }
     },
-    //获取播放列表
-    getPlayList(){
-      this.playList = [
-        'http://music.163.com/song/media/outer/url?id=413859.mp3',
-        'http://music.163.com/song/media/outer/url?id=413860.mp3',
-        'http://music.163.com/song/media/outer/url?id=413861.mp3'
-      ]
-      this.playByIndex(0)
-    },
     //下一曲
     next(){
       if(this.audioEl){
@@ -56,11 +57,18 @@ export default defineStore('audioStore', {
         if(this.currentIndex >= this.playList.length){
           this.currentIndex = 0
         }
+        this.play()
       }
     },
     //上一曲
     prev(){
       if(this.audioEl){
+        this.pause()
+        this.currentIndex--
+        if(this.currentIndex < 0){
+          this.currentIndex = this.playList.length - 1
+        }
+        this.play()
       }
     },
     //播放指定的音频
@@ -76,6 +84,15 @@ export default defineStore('audioStore', {
         this.audioEl.volume = volume
       }
     },
+    //设置当前进度
+    setProgress(progress: number){
+      if(this.audioEl){
+        this.audioEl.currentTime = progress
+      }
+    },
+    //endregion
+
+    //region 监听方法
     //监听音频可以播放
     listenCanplay(){
       if(this.audioEl){
@@ -94,5 +111,6 @@ export default defineStore('audioStore', {
         this.volume = this.audioEl.volume
       }
     }
+    //endregion
   }
 })

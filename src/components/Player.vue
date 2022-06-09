@@ -10,9 +10,6 @@ onMounted(() => {
   audioEl.value = document.getElementById('appAudio') as HTMLAudioElement
   //获取列表
   store.getPlayList()
-  setTimeout(() => {
-    store.next()
-  }, 2000);
 })
 //监听播放的下标 更新当前播放的歌曲
 watch(currentIndex, (newVal) => {
@@ -30,10 +27,7 @@ watch(currentIndex, (newVal) => {
     @volumechange="store.listenVolumeChange()"
     :loop="isLoop"
   />
-  <div>
-    <icon-ep-arrow-up-bold/>
-    <icon-material-symbols-skip-next-rounded/>
-  </div>
+  <PlayBar />
 </template>
 
 
