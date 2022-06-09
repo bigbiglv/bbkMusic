@@ -94,6 +94,13 @@ export default defineStore('audioStore', {
         this.audioEl.volume = volume
       }
     },
+    //设为静音
+    setMute(){
+      if(this.audioEl){
+        this.isMute = !this.isMute
+        this.audioEl.muted = this.isMute
+      }
+    },
     //设置当前进度
     setProgress(progress: number){
       if(this.audioEl){
