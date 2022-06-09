@@ -22,7 +22,7 @@ watch(route,(val)=>{
 </script>
 
 <template>
-  <div class="tabbar" :style="{height: `${tabBarHeight}px`}" v-show="showTabBar">
+  <div class="tabbar" :style="{height: `${tabBarHeight}px`}" v-if="showTabBar">
     <div v-for="(item,index) in tabbar" :key="index" @click="go(item.path)">
       <icon-ep-home-filled />
       {{item.name}}
@@ -33,12 +33,13 @@ watch(route,(val)=>{
 
 <style scoped>
 .tabbar{
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
-  width: 100%;
   padding: 0 10px;
+  box-sizing: border-box;
   position: fixed;
   bottom: 0;
   left: 0;

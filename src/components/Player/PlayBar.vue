@@ -59,7 +59,7 @@ const linePercent = computed(()=>{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // transition: .25s;
+  transition: .25s;
   .info{
     
   }
@@ -68,7 +68,7 @@ const linePercent = computed(()=>{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 24px;
+    font-size: 32px;
   }
   .line{
     width: 100%;

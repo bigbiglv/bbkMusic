@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    登录
+    <router-link to="/">login</router-link>
   </div>
 </template>
 
