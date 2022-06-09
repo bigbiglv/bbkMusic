@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+import { formatSeconds } from '@/utils'
 export default defineStore('audioStore', {
   state: () => {
     return {
@@ -15,6 +15,14 @@ export default defineStore('audioStore', {
     }
   },
   getters: {
+    //显示的音频时间
+    showTime(state): string {
+      return formatSeconds(state.progress)
+    },
+    //显示的总时间
+    showDuration(state): string {
+      return formatSeconds(state.duration)
+    }
   },
   actions:{
     //播放音频
