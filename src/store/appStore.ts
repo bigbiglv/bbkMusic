@@ -1,6 +1,4 @@
 import { defineStore } from "pinia"
-import { useRoute } from "vue-router"
-const route = useRoute()
 export default defineStore('appStore', {
   state: () => {
     return {

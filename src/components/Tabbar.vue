@@ -15,7 +15,7 @@ function go(path : string){
 }
 //监听路由 判断是否显示tabbar
 watch(route,(val)=>{
-  let isShow = route.meta?.tabbar ? true : false
+  let isShow = val.meta?.tabbar ? true : false
   storeApp.setTabBar(isShow)
 })
 

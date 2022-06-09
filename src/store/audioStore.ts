@@ -56,23 +56,29 @@ export default defineStore('audioStore', {
     //下一曲
     next(){
       if(this.audioEl){
-        this.pause()
         this.currentIndex++
         if(this.currentIndex >= this.playList.length){
           this.currentIndex = 0
         }
-        this.play()
+        this.listenCanplay()?.then(()=>{
+          if(!this.isPause){
+            this.play()
+          } 
+        })
       }
     },
     //上一曲
     prev(){
       if(this.audioEl){
-        this.pause()
         this.currentIndex--
         if(this.currentIndex < 0){
           this.currentIndex = this.playList.length - 1
         }
-        this.play()
+        this.listenCanplay()?.then(()=>{
+          if(!this.isPause){
+            this.play()
+          } 
+        })
       }
     },
     //播放指定的音频
@@ -101,12 +107,14 @@ export default defineStore('audioStore', {
     listenCanplay(){
       if(this.audioEl){
         this.duration = this.audioEl.duration
+        return new Promise (resolve => {
+          resolve(true)
+        })
       }
     },
     //监听音频进度
     listenTimeUpdate(){
       if(this.audioEl && !this.isDrag){
-        console.log('监听音频进度')
         this.progress = this.audioEl.currentTime
       }
     },
@@ -114,6 +122,13 @@ export default defineStore('audioStore', {
     listenVolumeChange(){
       if(this.audioEl){
         this.volume = this.audioEl.volume
+      }
+    },
+    //监听音频播放结束
+    listenEnded(){
+      if(this.audioEl){
+        console.log('播放王弼')
+        this.next()
       }
     }
     //endregion

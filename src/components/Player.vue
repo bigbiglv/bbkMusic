@@ -25,6 +25,7 @@ watch(currentIndex, (newVal) => {
     @timeupdate="store.listenTimeUpdate()"
     @canplay="store.listenCanplay()"
     @volumechange="store.listenVolumeChange()"
+    @ended="store.listenEnded()"
     :loop="isLoop"
   />
   <PlayBar />

@@ -34,7 +34,7 @@ const linePercent = computed(()=>{
     <div class="line">
       <div class="progress" :style="{ width: `${linePercent}%` }"></div>
     </div>
-    <!-- {{showTime}}
+    {{showTime}}
     <van-slider 
       v-model.value="progress" 
       :min="0" 
@@ -42,7 +42,7 @@ const linePercent = computed(()=>{
       @dragStart="storeAudio.isDrag = true"
       @dragEnd="dragEnd"
     />
-    {{showDuration}} -->
+    {{showDuration}}
   </div>
 </template>
 
