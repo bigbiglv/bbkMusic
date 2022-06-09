@@ -4,16 +4,16 @@ import Player from '@/components/Player.vue';
 </script>
 
 <template>
-  <router-view>
-    <template #default="{ Component, route }">
-      <transition name="fade-slide" mode="out-in" appear>
-        <component :is="Component" :key="route.fullPath"/>
-      </transition>
-    </template>
-  </router-view>
+    <router-view>
+      <template #default="{ Component, route }">
+        <transition name="fade-slide" mode="out-in" appear>
+          <component :is="Component" :key="route.fullPath"/>
+        </transition>
+      </template>
+    </router-view>
 
-  <Tabbar />
-  <Player />
+    <Tabbar />
+    <Player />
 </template>
 
 <style>

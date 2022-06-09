@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import audioStore from '@/store/audioStore';
-const store = audioStore();
-let { showTime, showDuration } = storeToRefs(store)
+import appStore from '@/store/appStore';
 
+const storeAudio = audioStore();
+const storeApp = appStore();
+const { showTime, showDuration } = storeToRefs(storeAudio)
+const { playBarHeight, tabBarHeight } = storeToRefs(storeApp)
 
 </script>
 
 <template>
-  <div class="play-bar">
+  <div class="play-bar" :style="{height: `${playBarHeight}px`, bottom: `${tabBarHeight}px`}">
     {{showTime}}
     {{showDuration}}
     <div class="icon">
-      <icon-bxs-skip-previous-circle @click="store.prev"/>
-      <icon-bxs-skip-next-circle @click="store.next"/>
-      <icon-bxs-caret-right-circle @click="store.play"/>
+      <icon-bxs-skip-previous-circle @click="storeAudio.prev"/>
+      <icon-bxs-skip-next-circle @click="storeAudio.next"/>
+      <icon-bxs-caret-right-circle @click="storeAudio.play"/>
     </div>
   </div>
 </template>
@@ -23,12 +26,11 @@ let { showTime, showDuration } = storeToRefs(store)
 <style lang="scss" scoped>
 .play-bar{
   width: 100%;
-  height: 50px;
   position: fixed;
-  bottom: 50px;
   left: 0;
   display: flex;
   align-items: center;
+  transition: .25s;
   .icon{
     font-size: 24px;
   }

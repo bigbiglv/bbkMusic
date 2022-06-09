@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import TouchStick from '../../components/TouchStick.vue';
+import { ref } from 'vue';
 </script>
 
 <template>
   <div>
+    <router-link to="/login">login</router-link>
   </div>
 </template>
 
