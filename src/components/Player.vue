@@ -3,7 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import audioStore from '@/store/audioStore'
 const store = audioStore()
-let { audioEl, currentIndex } = storeToRefs(store)
+let { audioEl, currentIndex, isLoop } = storeToRefs(store)
 
 
 onMounted(() => {
@@ -20,17 +20,20 @@ watch(currentIndex, (newVal) => {
 })
 
 
-
 </script>
 
 <template>
   <audio 
     id="appAudio" 
-    controls 
     @timeupdate="store.listenTimeUpdate()"
     @canplay="store.listenCanplay()"
-    
+    @volumechange="store.listenVolumeChange()"
+    :loop="isLoop"
   />
+  <div>
+    <icon-ep-arrow-up-bold/>
+    <icon-material-symbols-skip-next-rounded/>
+  </div>
 </template>
 
 

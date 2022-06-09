@@ -70,6 +70,12 @@ export default defineStore('audioStore', {
         this.currentIndex = index
       }
     },
+    //设置音量
+    setVolume(volume: number){
+      if(this.audioEl){
+        this.audioEl.volume = volume
+      }
+    },
     //监听音频可以播放
     listenCanplay(){
       if(this.audioEl){
@@ -82,6 +88,11 @@ export default defineStore('audioStore', {
         this.progress = this.audioEl.currentTime
       }
     },
-
+    //监听音频音量
+    listenVolumeChange(){
+      if(this.audioEl){
+        this.volume = this.audioEl.volume
+      }
+    }
   }
 })
