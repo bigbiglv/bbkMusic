@@ -44,7 +44,7 @@ function dragEnd(){
   left: 0;
   display: flex;
   align-items: center;
-  transition: .25s;
+  // transition: .25s;
   .icon{
     font-size: 24px;
   }
