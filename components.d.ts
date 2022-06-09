@@ -5,7 +5,11 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    IconEpArrowUpBold: typeof import('~icons/ep/arrow-up-bold')['default']
+    IconEpCaretLeft: typeof import('~icons/ep/caret-left')['default']
     IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
+    IconIconParkAbnormal: typeof import('~icons/icon/park-abnormal')['default']
+    IconMaterialSymbolsSkipNextRounded: typeof import('~icons/material-symbols/skip-next-rounded')['default']
     Player: typeof import('./src/components/Player.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
