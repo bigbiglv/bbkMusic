@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Tabbar from '@/components/Tabbar.vue';
-import Player from '@/components/Player.vue';
+import Player from '@/components/Player/index.vue';
 </script>
 
 <template>

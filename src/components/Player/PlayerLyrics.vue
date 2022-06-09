@@ -19,6 +19,6 @@ const { showLrcMask } = storeToRefs(storeApp);
   background-color: aliceblue;
   position: fixed;
   left: 0;
-  
+  transition: .25s;
 }
 </style>

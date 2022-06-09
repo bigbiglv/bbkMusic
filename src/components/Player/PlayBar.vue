@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import audioStore from '@/store/audioStore';
 import appStore from '@/store/appStore';
+import PlayerLyricsVue from '@/components/Player/PlayerLyrics.vue';
 
 const storeAudio = audioStore();
 const storeApp = appStore();
@@ -44,6 +45,7 @@ const linePercent = computed(()=>{
     />
     {{showDuration}} -->
   </div>
+  <PlayerLyricsVue />
 </template>
 
 

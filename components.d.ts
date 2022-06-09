@@ -12,7 +12,7 @@ declare module '@vue/runtime-core' {
     IconBxsSkipPreviousCircle: typeof import('~icons/bxs/skip-previous-circle')['default']
     IconEpHomeFilled: typeof import('~icons/ep/home-filled')['default']
     PlayBar: typeof import('./src/components/Player/PlayBar.vue')['default']
-    Player: typeof import('./src/components/Player/Player.vue')['default']
+    Player: typeof import('./src/components/Player/index.vue')['default']
     PlayerLyrics: typeof import('./src/components/Player/PlayerLyrics.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
