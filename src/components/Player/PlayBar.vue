@@ -69,6 +69,7 @@ const linePercent = computed(()=>{
     align-items: center;
     justify-content: space-between;
     font-size: 32px;
+    color: $hiwanglv;
   }
   .line{
     width: 100%;
@@ -82,7 +83,7 @@ const linePercent = computed(()=>{
       position: absolute;
       left: 0;
       bottom: 0;
-      background-color: rgb(255, 196, 196);
+      background-color: $hiwanglv;
       transition: .25s;
     }
   }
