@@ -35,6 +35,14 @@ export default defineStore('audioStore', {
       ]
       this.playByIndex(0)
     },
+    //添加播放列表
+    addPlayList(url: string){
+      this.playList.push(url)
+      //播放刚添加的歌曲
+      this.playByIndex(this.playList.length - 1)
+      
+    },
+    //是否正在拖动进度条
     setDrag(isDrag: boolean){
       this.isDrag = isDrag
     },
