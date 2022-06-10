@@ -10,10 +10,6 @@ let { audioEl, currentIndex, isLoop } = storeToRefs(store)
 onMounted(() => {
   audioEl.value = document.getElementById('appAudio') as HTMLAudioElement
 })
-//监听播放的下标 更新当前播放的歌曲
-watch(currentIndex, (newVal) => {
-  store.playByIndex(newVal)
-})
 
 
 </script>

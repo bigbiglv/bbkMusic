@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia'
 import { formatSeconds } from '@/utils'
+import { useFetch } from '@vueuse/core'
+
 export default defineStore('audioStore', {
   state: () => {
     return {
       audioEl: null as HTMLAudioElement | null,
       isPause: true,   //是否暂停
-      playList: [] as string[],  //播放列表
+      playList: [] as object[],  //播放列表
+      currentSong: {} as object, //当前播放的歌曲
       currentIndex: 0, //当前播放的音乐的下标
       duration: 0,     //当前播放音乐的总时长
       progress: 0,     //当前播放音乐的进度
@@ -27,8 +30,8 @@ export default defineStore('audioStore', {
   },
   actions:{
     //添加播放列表
-    addPlayList(url: string){
-      this.playList.push(url)
+    addPlayList(obj: object){
+      this.playList.push(obj)
       //播放刚添加的歌曲
       this.playByIndex(this.playList.length - 1)
 
@@ -56,34 +59,40 @@ export default defineStore('audioStore', {
     },
     //下一曲
     next(){
+      console.log('下一曲')
       if(this.audioEl){
         this.currentIndex++
         if(this.currentIndex >= this.playList.length){
           this.currentIndex = 0
         }
-        if(!this.isPause){
-          this.play()
-        } 
+        this.playByIndex(this.currentIndex)
       }
     },
     //上一曲
     prev(){
+      console.log('上一曲')
       if(this.audioEl){
         this.currentIndex--
         if(this.currentIndex < 0){
           this.currentIndex = this.playList.length - 1
         }
-        if(!this.isPause){
-          this.play()
-        } 
+        this.playByIndex(this.currentIndex)
       }
     },
     //播放指定的音频
-    playByIndex(index: number){
+    async playByIndex(index: number){
       if(this.audioEl){
-        this.audioEl.src = this.playList[index]
+        await this.getCurrentSong(this.playList[index].id)
+        this.audioEl.src = this.currentSong.url
         this.currentIndex = index
+        this.play()
       }
+    },
+    //根据id 请求获取播放url
+    async getCurrentSong(id: number){
+      let url = `http://localhost:3000/song/url?id=${id}`
+      const { data } = await useFetch(url).json()
+      this.currentSong = data.value.data[0]
     },
     //设置音量
     setVolume(volume: number){
@@ -131,7 +140,6 @@ export default defineStore('audioStore', {
     //监听音频播放结束
     listenEnded(){
       if(this.audioEl){
-        console.log('播放王弼')
         this.next()
       }
     }
