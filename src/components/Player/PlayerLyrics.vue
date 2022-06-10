@@ -2,9 +2,8 @@
 import appStore from '@/store/appStore';
 import audioStore from '@/store/audioStore';
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { watch, reactive } from 'vue';
 import { useDocumentVisibility } from '@vueuse/core'
-
 const storeApp = appStore();
 const storeAudio = audioStore();
 const { showLrcMask } = storeToRefs(storeApp);
@@ -29,10 +28,48 @@ watch(visibility, (current, previous) => {
     console.log('visibility隐藏')
   }
 })
+interface IPos{
+  Y: number,
+  offsetY: number
+}
+const position = reactive<IPos>({
+  Y: 0,
+  offsetY: 0
+})
+
+function handleTouchStart(e: TouchEvent){
+  // console.log('touchstart',e)
+  //阻止默认事件
+  e.preventDefault();
+  //初始化位置
+  position.Y = e.changedTouches[0].clientY;
+}
+function handleTouchEnd(e: TouchEvent){
+  // console.log('touchend',e)
+  let Y = e.changedTouches[0].clientY;
+  //偏差
+  position.offsetY = position.Y - Y;
+}
+function handleTouchMove(e: TouchEvent){
+  // console.log('touchmove',e)
+  if(position.offsetY > 0 && Math.abs(position.offsetY) > 20){
+    console.log('向下滑动')
+    //关闭遮罩
+    showLrcMask.value = false
+  } 
+  if(position.offsetY < 0 && Math.abs(position.offsetY) > 20) console.log('向上滑动');
+}
+
 </script>
 
 <template>
-  <div class="lyr-wrap" :style="{top: `${showLrcMask ? '0' : '100%'}`}">
+  <div 
+    class="lyr-wrap" 
+    :style="{top: `${showLrcMask ? '0' : '100%'}`}"
+    @touchstart="handleTouchStart($event)"
+    @touchmove="handleTouchMove($event)"
+    @touchend="handleTouchEnd($event)"
+  >
     <div class="lyr-mask" @click="showLrcMask = false">关闭</div>
   </div>
 </template>
