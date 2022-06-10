@@ -7,7 +7,7 @@ import PlayerLyricsVue from '@/components/Player/PlayerLyrics.vue';
 
 const storeAudio = audioStore();
 const storeApp = appStore();
-const { isPause, showTime, showDuration, duration, progress } = storeToRefs(storeAudio)
+const { isPause, showTime, showDuration, duration, progress, playList } = storeToRefs(storeAudio)
 const { playBarHeight, tabBarHeight } = storeToRefs(storeApp)
 
 function dragEnd(){
@@ -21,7 +21,7 @@ const linePercent = computed(()=>{
 </script>
 
 <template>
-  <div class="play-bar" :style="{height: `${playBarHeight}px`, bottom: `${tabBarHeight}px`}">
+  <div class="play-bar" :style="{height: `${playBarHeight}px`, bottom: `${playList.length ? tabBarHeight+'px' : '-100%'}`}">
     <div class="cove"></div>
     <div class="info"></div>
     <div class="btn">

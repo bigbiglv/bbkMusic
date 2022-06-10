@@ -26,15 +26,6 @@ export default defineStore('audioStore', {
     }
   },
   actions:{
-    //获取播放列表
-    getPlayList(){
-      this.playList = [
-        'http://music.163.com/song/media/outer/url?id=413859.mp3',
-        'http://music.163.com/song/media/outer/url?id=413860.mp3',
-        'http://music.163.com/song/media/outer/url?id=413861.mp3'
-      ]
-      this.playByIndex(0)
-    },
     //添加播放列表
     addPlayList(url: string){
       this.playList.push(url)
