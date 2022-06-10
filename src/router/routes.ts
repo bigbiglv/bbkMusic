@@ -50,5 +50,13 @@ export const routes: IRoute[] = [
       keepAlive: true,
       title: '登录'
     }
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/Search/index.vue'),
+    meta: {
+      title: '搜索'
+    }
   }
 ]
