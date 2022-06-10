@@ -25,7 +25,7 @@ const linePercent = computed(()=>{
     <div class="cove">
       <img :src="playList[currentIndex].album.artist.img1v1Url" alt="封面">
     </div>
-    <div class="info">
+    <div class="info" @click="storeApp.showLrcMask = true">
       {{playList[currentIndex].name}}
     </div>
     <div class="btn">
