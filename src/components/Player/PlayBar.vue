@@ -23,10 +23,10 @@ const linePercent = computed(()=>{
 <template>
   <div class="play-bar" :style="{height: `${playBarHeight}px`, bottom: `${playList.length ? tabBarHeight+'px' : '-100%'}`}">
     <div class="cove">
-      <img :src="playList[currentIndex].album.artist.img1v1Url" alt="封面">
+      <img :src="playList[currentIndex]?.album.artist.img1v1Url" alt="封面">
     </div>
     <div class="info" @click="storeApp.showLrcMask = true">
-      {{playList[currentIndex].name}}
+      {{playList[currentIndex]?.name}}
     </div>
     <div class="btn">
       <icon-bxs-skip-previous-circle @click="storeAudio.prev"/>

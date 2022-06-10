@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { formatSeconds } from '@/utils'
 import { useFetch } from '@vueuse/core'
+import appStore from './appStore'
 
 export default defineStore('audioStore', {
   state: () => {
@@ -16,6 +17,7 @@ export default defineStore('audioStore', {
       isMute: false,   //是否静音
       volume: 1,       //音量
       isDrag: false,   //是否正在拖拽进度条
+      lyric: {} as object, //歌词
     }
   },
   getters: {
@@ -79,20 +81,33 @@ export default defineStore('audioStore', {
         this.playByIndex(this.currentIndex)
       }
     },
-    //播放指定的音频
+    //播放指定的音频 切歌
     async playByIndex(index: number){
       if(this.audioEl){
+        //获取播放url
         await this.getCurrentSong(this.playList[index].id)
+        //url设置到audio元素
         this.audioEl.src = this.currentSong.url
         this.currentIndex = index
         this.play()
+        //歌词层打开的时候请求歌词
+        if(appStore().showLrcMask){
+
+          this.getLrc(this.playList[index].id)
+        }
       }
     },
     //根据id 请求获取播放url
     async getCurrentSong(id: number){
       let url = `http://localhost:3000/song/url?id=${id}`
-      const { data } = await useFetch(url).json()
+      const { data } = await useFetch(url).json() || {}
       this.currentSong = data.value.data[0]
+    },
+    //根据id 请求获取歌词
+    async getLrc(id: number){
+      let url = `http://localhost:3000/lyric?id=${id}`
+      const { data } = await useFetch(url).json() || {}
+      this.lyric = data.value
     },
     //设置音量
     setVolume(volume: number){
