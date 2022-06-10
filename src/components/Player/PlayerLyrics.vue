@@ -3,10 +3,13 @@ import appStore from '@/store/appStore';
 import audioStore from '@/store/audioStore';
 import { storeToRefs } from 'pinia';
 import { watch } from 'vue';
+import { useDocumentVisibility } from '@vueuse/core'
+
 const storeApp = appStore();
 const storeAudio = audioStore();
 const { showLrcMask } = storeToRefs(storeApp);
 const { playList, currentIndex } = storeToRefs(storeAudio);
+//监听是否打开歌词层
 watch(showLrcMask,(val) => {
   if(val){
     console.log('显示')
@@ -17,6 +20,15 @@ watch(showLrcMask,(val) => {
   }
 })
 
+const visibility = useDocumentVisibility()
+//监听是否在前台
+watch(visibility, (current, previous) => {
+  if (current === 'visible' && previous === 'hidden') {
+    console.log('visibility显示')
+  }else{
+    console.log('visibility隐藏')
+  }
+})
 </script>
 
 <template>
