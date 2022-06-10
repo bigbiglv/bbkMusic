@@ -7,7 +7,7 @@ import PlayerLyricsVue from '@/components/Player/PlayerLyrics.vue';
 
 const storeAudio = audioStore();
 const storeApp = appStore();
-const { isPause, showTime, showDuration, duration, progress, playList } = storeToRefs(storeAudio)
+const { isPause, showTime, showDuration, duration, progress, playList,currentIndex } = storeToRefs(storeAudio)
 const { playBarHeight, tabBarHeight } = storeToRefs(storeApp)
 
 function dragEnd(){
@@ -22,8 +22,12 @@ const linePercent = computed(()=>{
 
 <template>
   <div class="play-bar" :style="{height: `${playBarHeight}px`, bottom: `${playList.length ? tabBarHeight+'px' : '-100%'}`}">
-    <div class="cove"></div>
-    <div class="info"></div>
+    <div class="cove">
+      <img :src="playList[currentIndex].album.artist.img1v1Url" alt="封面">
+    </div>
+    <div class="info">
+      {{playList[currentIndex].name}}
+    </div>
     <div class="btn">
       <icon-bxs-skip-previous-circle @click="storeAudio.prev"/>
 
@@ -59,7 +63,16 @@ const linePercent = computed(()=>{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: $yueyingbai;
   transition: .25s;
+  .cove{
+    width: 40px;
+    height: 40px;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
   .info{
     
   }
