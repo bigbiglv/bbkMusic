@@ -40,7 +40,7 @@ export default defineStore('audioStore', {
       this.playList.push(url)
       //播放刚添加的歌曲
       this.playByIndex(this.playList.length - 1)
-      
+
     },
     //是否正在拖动进度条
     setDrag(isDrag: boolean){
@@ -48,8 +48,10 @@ export default defineStore('audioStore', {
     },
     // region 控制方法
     //播放音频
-    play(){
+    async play(){
       if(this.audioEl){
+        //先判断准备好播放了没有
+        await this.listenCanplay()
         this.audioEl.play()
         this.isPause = false
       }
@@ -68,11 +70,9 @@ export default defineStore('audioStore', {
         if(this.currentIndex >= this.playList.length){
           this.currentIndex = 0
         }
-        this.listenCanplay()?.then(()=>{
-          if(!this.isPause){
-            this.play()
-          } 
-        })
+        if(!this.isPause){
+          this.play()
+        } 
       }
     },
     //上一曲
@@ -82,11 +82,9 @@ export default defineStore('audioStore', {
         if(this.currentIndex < 0){
           this.currentIndex = this.playList.length - 1
         }
-        this.listenCanplay()?.then(()=>{
-          if(!this.isPause){
-            this.play()
-          } 
-        })
+        if(!this.isPause){
+          this.play()
+        } 
       }
     },
     //播放指定的音频
