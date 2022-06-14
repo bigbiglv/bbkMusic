@@ -7,7 +7,7 @@ import { useDocumentVisibility } from '@vueuse/core'
 const storeApp = appStore();
 const storeAudio = audioStore();
 const { showLrcMask } = storeToRefs(storeApp);
-const { playList, currentIndex } = storeToRefs(storeAudio);
+const { playList, currentIndex, lrc, progress } = storeToRefs(storeAudio);
 //监听是否打开歌词层
 watch(showLrcMask,(val) => {
   if(val){
@@ -69,7 +69,6 @@ function handleTouchMove(e: TouchEvent){
   let Y = e.changedTouches[0].clientY;
   position.offsetY = position.Y - Y;
 }
-
 </script>
 
 <template>
@@ -80,7 +79,12 @@ function handleTouchMove(e: TouchEvent){
     @touchmove="handleTouchMove($event)"
     @touchend="handleTouchEnd($event)"
   >
-    <div class="lyr-mask" @click="showLrcMask.value = false">关闭</div>
+    <div class="" @click="showLrcMask.value = false">关闭</div>
+    <div class="lyr-list">
+      <p v-for="(item,keys) in lrc" :key="keys" :class="[keys < progress ? 'on' : '']">
+        {{item}}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -93,5 +97,15 @@ function handleTouchMove(e: TouchEvent){
   position: fixed;
   left: 0;
   transition: .25s;
+  .lyr-list{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+    overflow-y: scroll;
+    text-align: center;
+    .on{
+      color: aquamarine;
+    }
+  }
 }
 </style>

@@ -25,3 +25,21 @@ export const formatSeconds = (seconds: number) => {
   }
   return time
 }
+/*
+* 格式化歌词数组
+*/ 
+export const formatLrc = (lrc: string) => {
+  let lrcArr = lrc.split('\n')
+  let lrcObj = {}
+  lrcArr.forEach(item => {
+    let time = item.match(/\[\d{2,3}:\d{2}\.\d{2,3}\]/)
+    let content = item.replace(/\[\d{2,3}:\d{2}\.\d{2,3}\]/g, '')
+    if (time) {
+      let timeStr = time[0].slice(1, -1)
+      let timeArr = timeStr.split(':')
+      let timeNum = (parseInt(timeArr[0]) * 60 *1000 + parseFloat(timeArr[1]) * 1000) /1000
+      lrcObj[timeNum] = content
+    }
+  })
+  return lrcObj
+}

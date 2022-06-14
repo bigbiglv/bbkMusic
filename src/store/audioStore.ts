@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { formatSeconds } from '@/utils'
+import { formatSeconds,formatLrc } from '@/utils'
 import { useFetch } from '@vueuse/core'
 import appStore from './appStore'
 
@@ -28,6 +28,10 @@ export default defineStore('audioStore', {
     //显示的总时间
     showDuration(state): string {
       return formatSeconds(state.duration)
+    },
+    //歌词
+    lrc(state): Array{
+      return state.lyric.lrc ? formatLrc(state.lyric.lrc.lyric) : []
     }
   },
   actions:{
