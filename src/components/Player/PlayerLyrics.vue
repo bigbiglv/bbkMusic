@@ -8,6 +8,7 @@ const storeApp = appStore();
 const storeAudio = audioStore();
 const { showLrcMask } = storeToRefs(storeApp);
 const { playList, currentIndex, lrc, progress } = storeToRefs(storeAudio);
+
 //监听是否打开歌词层
 watch(showLrcMask,(val) => {
   if(val){
@@ -28,10 +29,7 @@ watch(visibility, (current, previous) => {
     console.log('visibility隐藏')
   }
 })
-interface IPos{
-  Y: number,
-  offsetY: number
-}
+
 //歌词层top的位置
 const top = computed(()=>{
   if(showLrcMask.value){
@@ -41,10 +39,13 @@ const top = computed(()=>{
       return '0'
     }
   }else{
-    
     return '100%'
   }
 })
+interface IPos{
+  Y: number,
+  offsetY: number
+}
 //歌词层y轴的偏移量
 const position = reactive<IPos>({
   Y: 0,
@@ -60,7 +61,7 @@ function handleTouchStart(e: TouchEvent){
 }
 function handleTouchEnd(e: TouchEvent){
   //向下滑动 超过一定值就关闭歌词层
-  position.offsetY < -300 ? showLrcMask.value = false : ''
+  position.offsetY < -300 ? showLrcMask.value = false : ''  
   position.offsetY = 0
 
 }
@@ -69,6 +70,17 @@ function handleTouchMove(e: TouchEvent){
   let Y = e.changedTouches[0].clientY;
   position.offsetY = position.Y - Y;
 }
+//当前播放的下标
+let lrcIndex = ref(0)
+let lrcKeys = Object.keys(lrc.value)
+//监听进度设置当前唱到的歌词的下标
+watch(progress,(value)=>{
+  for( let i = 0; i < lrcKeys.length; i++){
+    if(value >= Number(lrcKeys[i])){
+      lrcIndex.value = i
+    }
+  }
+})
 </script>
 
 <template>
@@ -81,8 +93,8 @@ function handleTouchMove(e: TouchEvent){
   >
     <div class="" @click="showLrcMask.value = false">关闭</div>
     <div class="lyr-list">
-      <p v-for="(item,keys) in lrc" :key="keys" :class="[keys < progress ? 'on' : '']">
-        {{item}}
+      <p v-for="(item,keys,index) in lrc" :key="keys" :class="[index === lrcIndex  ? 'on' : '']">
+        {{item}}{{index}}
       </p>
     </div>
   </div>
