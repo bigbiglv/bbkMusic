@@ -2,7 +2,7 @@
 import appStore from '@/store/appStore';
 import audioStore from '@/store/audioStore';
 import { storeToRefs } from 'pinia';
-import { watch, reactive } from 'vue';
+import { watch, reactive, ref, computed } from 'vue';
 import { useDocumentVisibility } from '@vueuse/core'
 const storeApp = appStore();
 const storeAudio = audioStore();
@@ -32,6 +32,20 @@ interface IPos{
   Y: number,
   offsetY: number
 }
+//歌词层top的位置
+const top = computed(()=>{
+  if(showLrcMask.value){
+    if(position.offsetY < -20){
+      return -position.offsetY + 'px'
+    }else{
+      return '0'
+    }
+  }else{
+    
+    return '100%'
+  }
+})
+//歌词层y轴的偏移量
 const position = reactive<IPos>({
   Y: 0,
   offsetY: 0
@@ -45,19 +59,15 @@ function handleTouchStart(e: TouchEvent){
   position.Y = e.changedTouches[0].clientY;
 }
 function handleTouchEnd(e: TouchEvent){
-  // console.log('touchend',e)
-  let Y = e.changedTouches[0].clientY;
-  //偏差
-  position.offsetY = position.Y - Y;
+  //向下滑动 超过一定值就关闭歌词层
+  position.offsetY < -300 ? showLrcMask.value = false : ''
+  position.offsetY = 0
+
 }
 function handleTouchMove(e: TouchEvent){
-  // console.log('touchmove',e)
-  if(position.offsetY > 0 && Math.abs(position.offsetY) > 20){
-    console.log('向下滑动')
-    //关闭遮罩
-    showLrcMask.value = false
-  } 
-  if(position.offsetY < 0 && Math.abs(position.offsetY) > 20) console.log('向上滑动');
+  //偏差
+  let Y = e.changedTouches[0].clientY;
+  position.offsetY = position.Y - Y;
 }
 
 </script>
@@ -65,12 +75,12 @@ function handleTouchMove(e: TouchEvent){
 <template>
   <div 
     class="lyr-wrap" 
-    :style="{top: `${showLrcMask ? '0' : '100%'}`}"
+    :style="{top: top}"
     @touchstart="handleTouchStart($event)"
     @touchmove="handleTouchMove($event)"
     @touchend="handleTouchEnd($event)"
   >
-    <div class="lyr-mask" @click="showLrcMask = false">关闭</div>
+    <div class="lyr-mask" @click="showLrcMask.value = false">关闭</div>
   </div>
 </template>
 
