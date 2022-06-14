@@ -30,7 +30,7 @@ export default defineStore('audioStore', {
       return formatSeconds(state.duration)
     },
     //歌词
-    lrc(state): Array{
+    lrc(state): object {
       return state.lyric.lrc ? formatLrc(state.lyric.lrc.lyric) : []
     }
   },

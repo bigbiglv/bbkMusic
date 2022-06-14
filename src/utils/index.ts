@@ -29,8 +29,11 @@ export const formatSeconds = (seconds: number) => {
 * 格式化歌词数组
 */ 
 export const formatLrc = (lrc: string) => {
+  interface Ilrc {
+    [key : string]: string
+  }
   let lrcArr = lrc.split('\n')
-  let lrcObj = {}
+  let lrcObj: Ilrc = {}
   lrcArr.forEach(item => {
     let time = item.match(/\[\d{2,3}:\d{2}\.\d{2,3}\]/)
     let content = item.replace(/\[\d{2,3}:\d{2}\.\d{2,3}\]/g, '')

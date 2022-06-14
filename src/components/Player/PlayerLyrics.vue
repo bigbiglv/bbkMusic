@@ -10,11 +10,11 @@ const { showLrcMask } = storeToRefs(storeApp);
 const { playList, currentIndex, lrc, progress } = storeToRefs(storeAudio);
 
 //监听是否打开歌词层
-watch(showLrcMask,(val) => {
+watch(showLrcMask,async (val) => {
   if(val){
     console.log('显示')
     let id = playList.value[currentIndex.value].id
-    storeAudio.getLrc(id)
+    await storeAudio.getLrc(id)
   }else{
     console.log('隐藏')
   }
@@ -75,12 +75,16 @@ let lrcIndex = ref(0)
 let lrcKeys = Object.keys(lrc.value)
 //监听进度设置当前唱到的歌词的下标
 watch(progress,(value)=>{
-  for( let i = 0; i < lrcKeys.length; i++){
-    if(value >= Number(lrcKeys[i])){
-      lrcIndex.value = i
+  if(lrcKeys.length){
+    for( let i = 0; i < lrcKeys.length; i++){
+      if(value >= Number(lrcKeys[i])){
+        lrcIndex.value = i
+        console.log('改变',i)
+      }
     }
-  }
+  } 
 })
+
 </script>
 
 <template>
@@ -93,8 +97,12 @@ watch(progress,(value)=>{
   >
     <div class="" @click="showLrcMask.value = false">关闭</div>
     <div class="lyr-list">
-      <p v-for="(item,keys,index) in lrc" :key="keys" :class="[index === lrcIndex  ? 'on' : '']">
-        {{item}}{{index}}
+      <p 
+        v-for="(item,keys,index) in lrc" 
+        :class="[index === lrcIndex  ? 'on' : '']"
+        :key="keys" 
+      >
+        {{item}}
       </p>
     </div>
   </div>
