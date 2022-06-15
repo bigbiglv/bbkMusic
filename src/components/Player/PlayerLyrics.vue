@@ -7,7 +7,7 @@ import { useDocumentVisibility } from '@vueuse/core'
 const storeApp = appStore();
 const storeAudio = audioStore();
 const { showLrcMask } = storeToRefs(storeApp);
-const { playList, currentIndex, lrc, progress } = storeToRefs(storeAudio);
+const { playList, currentIndex, lrc, lrcIndex } = storeToRefs(storeAudio);
 
 //监听是否打开歌词层
 watch(showLrcMask,async (val) => {
@@ -70,21 +70,6 @@ function handleTouchMove(e: TouchEvent){
   let Y = e.changedTouches[0].clientY;
   position.offsetY = position.Y - Y;
 }
-//当前播放的下标
-let lrcIndex = ref(0)
-let lrcKeys = Object.keys(lrc.value)
-//监听进度设置当前唱到的歌词的下标
-watch(progress,(value)=>{
-  if(lrcKeys.length){
-    for( let i = 0; i < lrcKeys.length; i++){
-      if(value >= Number(lrcKeys[i])){
-        lrcIndex.value = i
-        console.log('改变',i)
-      }
-    }
-  } 
-})
-
 </script>
 
 <template>

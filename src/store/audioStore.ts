@@ -18,6 +18,7 @@ export default defineStore('audioStore', {
       volume: 1,       //音量
       isDrag: false,   //是否正在拖拽进度条
       lyric: {} as object, //歌词
+      lrcIndex: 0,     //播放到的歌词的下标
     }
   },
   getters: {
@@ -31,7 +32,7 @@ export default defineStore('audioStore', {
     },
     //歌词
     lrc(state): object {
-      return state.lyric.lrc ? formatLrc(state.lyric.lrc.lyric) : []
+      return state.lyric.lrc ? formatLrc(state.lyric.lrc.lyric) : {}
     }
   },
   actions:{
@@ -46,7 +47,7 @@ export default defineStore('audioStore', {
     setDrag(isDrag: boolean){
       this.isDrag = isDrag
     },
-    // region 控制方法
+    //region 控制方法
     //播放音频
     async play(){
       if(this.audioEl){
@@ -132,6 +133,17 @@ export default defineStore('audioStore', {
         this.audioEl.currentTime = progress
       }
     },
+    //设置歌词进度的下标
+    setLrcIndex(){
+      //打开歌词层的时候才设置歌词进度
+      if(appStore().showLrcMask && Object.keys(this.lrc).length){
+        for( let i = 0; i < Object.keys(this.lrc).length; i++){
+          if(this.progress >= Number(Object.keys(this.lrc)[i])){
+            this.lrcIndex = i
+          } 
+        }  
+      }
+    },
     //endregion
 
     //region 监听方法
@@ -148,6 +160,8 @@ export default defineStore('audioStore', {
     listenTimeUpdate(){
       if(this.audioEl && !this.isDrag){
         this.progress = this.audioEl.currentTime
+        //歌词进度 
+        this.setLrcIndex()
       }
     },
     //监听音频音量
