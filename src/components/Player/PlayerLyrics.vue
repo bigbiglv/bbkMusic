@@ -15,13 +15,18 @@ watch(showLrcMask,async (val) => {
     console.log('显示')
     let id = playList.value[currentIndex.value].id
     await storeAudio.getLrc(id)
+      
   }else{
     console.log('隐藏')
   }
 })
-
+//监听歌词变化
+watch(lrcIndex,()=>{
+  
+  setLrcLoc()
+})
 const visibility = useDocumentVisibility()
-//监听是否在前台
+//监听是否在前台  
 watch(visibility, (current, previous) => {
   if (current === 'visible' && previous === 'hidden') {
     console.log('visibility显示')
@@ -29,6 +34,19 @@ watch(visibility, (current, previous) => {
     console.log('visibility隐藏')
   }
 })
+//设置当前歌词段落的位置
+function setLrcLoc(){
+  let list = document.getElementById('list')
+  let listWidth = list.offsetWidth
+  let listHeight = list.offsetHeight
+  let id = `lyrRef${lrcIndex.value}`
+  let lyrRef = document.getElementById(id).getBoundingClientRect().top
+  if(lyrRef > listHeight/2){
+    list?.scrollTo(0,lyrRef)
+  }
+  console.log('lyrRef',lyrRef,listHeight/2)
+}
+
 
 //歌词层top的位置
 const top = computed(()=>{
@@ -70,6 +88,7 @@ function handleTouchMove(e: TouchEvent){
   let Y = e.changedTouches[0].clientY;
   position.offsetY = position.Y - Y;
 }
+
 </script>
 
 <template>
@@ -81,11 +100,12 @@ function handleTouchMove(e: TouchEvent){
     @touchend="handleTouchEnd($event)"
   >
     <div class="" @click="showLrcMask.value = false">关闭</div>
-    <div class="lyr-list">
+    <div class="lyr-list" id="list">
       <p 
         v-for="(item,keys,index) in lrc" 
         :class="[index === lrcIndex  ? 'on' : '']"
         :key="keys" 
+        :id="'lyrRef' + index"
       >
         {{item}}
       </p>
