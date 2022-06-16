@@ -39,8 +39,7 @@ function setLrcLoc(){
   let listHeight = list.offsetHeight
   let id = `lyrRef${lrcIndex.value}`
   let lyrRef = document.getElementById(id).offsetTop
-  list?.scrollTo(0,lyrRef-listHeight/2)
-  console.log('lyrRef',document.getElementById(id),lyrRef,listHeight/2,lyrRef-listHeight/2)
+  list?.scrollTo({top:lyrRef-listHeight/2,behavior: "smooth"})
 }
 
 
@@ -109,7 +108,6 @@ function handleTouchEndLrc(){
     @touchmove="handleTouchMove($event)"
     @touchend="handleTouchEnd($event)"
   >
-    <div class="" @click="showLrcMask.value = false">关闭</div>
     <div 
       class="lyr-list" 
       id="list"
@@ -144,8 +142,13 @@ function handleTouchEndLrc(){
     margin: 0 auto;
     overflow-y: scroll;
     text-align: center;
+    ::-webkit-scrollbar{
+      display: none;
+    }
     .on{
       color: aquamarine;
+      font-size: 18px;
+      transition: .25s;
     }
   }
 }
