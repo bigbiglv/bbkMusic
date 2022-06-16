@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import Tabbar from '@/components/Tabbar.vue';
 import Player from '@/components/Player/index.vue';
+import NavBar from '@/components/NavBar.vue'
+
 </script>
 
 <template>
     <router-view>
       <template #default="{ Component, route }">
+        <NavBar />
         <transition name="fade-slide" mode="out-in" appear>
           <component :is="Component" :key="route.fullPath"/>
         </transition>

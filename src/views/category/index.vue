@@ -5,7 +5,7 @@ import NavBar from '@/components/NavBar.vue'
 
 <template>
   <div>
-    <NavBar />
+    <!-- <NavBar /> -->
     category
   </div>
 </template>

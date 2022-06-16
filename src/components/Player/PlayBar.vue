@@ -29,12 +29,14 @@ const linePercent = computed(()=>{
       {{playList[currentIndex]?.name}}
     </div>
     <div class="btn">
-      <icon-bxs-skip-previous-circle @click="storeAudio.prev"/>
 
-      <icon-bxs-caret-right-circle @click="storeAudio.play" v-show="isPause"/>
-      <icon-bxs-building-house @click="storeAudio.pause" v-show="!isPause"/>
+      <icon-ic-twotone-skip-previous @click="storeAudio.prev"/>
+
+      <icon-ic-twotone-play-circle-filled @click="storeAudio.play" v-show="isPause"/>
+      <icon-ic-twotone-pause-circle-filled @click="storeAudio.pause" v-show="!isPause"/>
       
-      <icon-bxs-skip-next-circle @click="storeAudio.next"/>
+      <icon-ic-twotone-skip-next @click="storeAudio.next"/>
+
     </div>
     <div class="line">
       <div class="progress" :style="{ width: `${linePercent}%` }"></div>

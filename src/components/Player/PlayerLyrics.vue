@@ -146,7 +146,7 @@ function handleTouchEndLrc(){
       display: none;
     }
     .on{
-      color: aquamarine;
+      color: $hiwanglv;
       font-size: 18px;
       transition: .25s;
     }

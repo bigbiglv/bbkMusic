@@ -23,15 +23,22 @@ watch(route,(val)=>{
 
 <template>
   <div class="tabbar" :style="{height: `${tabBarHeight}px`}" v-if="showTabBar">
-    <div v-for="(item,index) in tabbar" :key="index" @click="go(item.path)">
-      <icon-ep-home-filled />
+    <div 
+      v-for="(item,index) in tabbar" 
+      :key="index" 
+      @click="go(item.path)"
+      :class="{active: route.path === item.path}"
+      class="item"
+    >
+      <icon-icon-park-twotone-home v-if="index === 0"/>
+      <icon-icon-park-twotone-category-management v-if="index === 1"/>
       {{item.name}}
     </div>
   </div>
 </template>
 
 
-<style scoped>
+<style lang="scss" scoped>
 .tabbar{
   width: 100%;
   display: flex;
@@ -43,5 +50,13 @@ watch(route,(val)=>{
   position: fixed;
   bottom: 0;
   left: 0;
+  .item{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &.active{
+      color: $hiwanglv;
+    }
+  }
 }
 </style>

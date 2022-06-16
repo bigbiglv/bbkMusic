@@ -5,7 +5,7 @@ import NavBar from '@/components/NavBar.vue'
 
 <template>
   <div>
-    <NavBar />
+    <!-- <NavBar /> -->
     <router-link to="/login">login</router-link>
   </div>
 </template>
