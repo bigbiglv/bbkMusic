@@ -11,7 +11,7 @@ const tabbar = routes.filter(el => el.meta?.tabbar)
 const storeApp = appStore()
 const { tabBarHeight, showTabBar } = storeToRefs(storeApp)
 function go(path : string){
-  router.push(path)
+  router.replace(path)
 }
 //监听路由 判断是否显示tabbar
 watch(route,(val)=>{
