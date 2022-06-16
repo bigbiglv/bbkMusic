@@ -37,14 +37,11 @@ watch(visibility, (current, previous) => {
 //设置当前歌词段落的位置
 function setLrcLoc(){
   let list = document.getElementById('list')
-  let listWidth = list.offsetWidth
   let listHeight = list.offsetHeight
   let id = `lyrRef${lrcIndex.value}`
-  let lyrRef = document.getElementById(id).getBoundingClientRect().top
-  if(lyrRef > listHeight/2){
-    list?.scrollTo(0,lyrRef)
-  }
-  console.log('lyrRef',lyrRef,listHeight/2)
+  let lyrRef = document.getElementById(id).offsetTop
+  list?.scrollTo(0,lyrRef-listHeight/2)
+  console.log('lyrRef',document.getElementById(id),lyrRef,listHeight/2,lyrRef-listHeight/2)
 }
 
 

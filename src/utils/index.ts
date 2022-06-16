@@ -41,7 +41,7 @@ export const formatLrc = (lrc: string) => {
       let timeStr = time[0].slice(1, -1)
       let timeArr = timeStr.split(':')
       let timeNum = (parseInt(timeArr[0]) * 60 *1000 + parseFloat(timeArr[1]) * 1000) /1000
-      lrcObj[timeNum] = content
+      if(content) lrcObj[timeNum] = content
     }
   })
   return lrcObj
