@@ -22,8 +22,7 @@ watch(showLrcMask,async (val) => {
 })
 //监听歌词变化
 watch(lrcIndex,()=>{
-  
-  setLrcLoc()
+  if(showLrcMask.value && !isMoveLrc.value) setLrcLoc()
 })
 const visibility = useDocumentVisibility()
 //监听是否在前台  
@@ -85,7 +84,21 @@ function handleTouchMove(e: TouchEvent){
   let Y = e.changedTouches[0].clientY;
   position.offsetY = position.Y - Y;
 }
-
+//是否正在滑動歌詞
+const isMoveLrc = ref(false)
+function handleTouchStartLrc(e: TouchEvent){
+  e.stopPropagation();
+  isMoveLrc.value = true
+  console.log('lrctouch')
+}
+function handleTouchMoveLrc(e: TouchEvent){
+  e.stopPropagation();
+  console.log('lrctouch')
+}
+function handleTouchEndLrc(){
+  isMoveLrc.value = false
+  console.log('lrctouch')
+}
 </script>
 
 <template>
@@ -97,7 +110,13 @@ function handleTouchMove(e: TouchEvent){
     @touchend="handleTouchEnd($event)"
   >
     <div class="" @click="showLrcMask.value = false">关闭</div>
-    <div class="lyr-list" id="list">
+    <div 
+      class="lyr-list" 
+      id="list"
+      @touchstart="handleTouchStartLrc($event)"
+      @touchend="handleTouchEndLrc($event)"
+      @touchmove="handleTouchMoveLrc($event)"
+    >
       <p 
         v-for="(item,keys,index) in lrc" 
         :class="[index === lrcIndex  ? 'on' : '']"
