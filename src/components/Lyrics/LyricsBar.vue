@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import audioStore from '@/store/audioStore';
+import appStore from '@/store/appStore';
 import { storeToRefs } from 'pinia';
 const storeAudio = audioStore();
+const storeApp = appStore();
 const { playSong } = storeToRefs(storeAudio);
+const { showLrcMask } = storeToRefs(storeApp);
+function closeLrc(){
+  showLrcMask.value = false
+}
 </script>
 
 <template>
@@ -15,7 +21,9 @@ const { playSong } = storeToRefs(storeAudio);
       <icon-icon-park-twotone-format-brush />
       <!-- <icon-icon-park-solid-format-brush /> -->
     </div>
-    <icon-icon-park-twotone-coconut-tree />
+    <div class="close-btn" @click="closeLrc">
+      <icon-icon-park-twotone-coconut-tree />
+    </div>
 
   </div>
 </template>
