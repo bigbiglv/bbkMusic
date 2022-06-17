@@ -26,6 +26,7 @@ function dragEnd(){
   </div>
 </div>
   <div class="btns">
+    
     <icon-ic-twotone-skip-previous @click="storeAudio.prev"/>
 
     <icon-ic-twotone-play-circle-filled @click="storeAudio.play" v-show="isPause"/>

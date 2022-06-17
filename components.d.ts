@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     IconLineMdSearch: typeof import('~icons/line-md/search')['default']
     IconPepiconsPause: typeof import('~icons/pepicons/pause')['default']
     IconPepiconsPausePrint: typeof import('~icons/pepicons/pause-print')['default']
+    Lrc: typeof import('./src/components/Lyrics/Lrc.vue')['default']
     Lyrics: typeof import('./src/components/Lyrics/index.vue')['default']
     LyricsBar: typeof import('./src/components/Lyrics/LyricsBar.vue')['default']
     LyricsPlayBar: typeof import('./src/components/Lyrics/LyricsPlayBar.vue')['default']
