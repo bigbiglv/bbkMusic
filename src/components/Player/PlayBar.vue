@@ -28,7 +28,7 @@ const linePercent = computed(()=>{
     <div class="info" @click="storeApp.showLrcMask = true">
       {{playList[currentIndex]?.name}}
     </div>
-    <div class="btn">
+    <div class="btns">
 
       <icon-ic-twotone-skip-previous @click="storeAudio.prev"/>
 
@@ -78,7 +78,7 @@ const linePercent = computed(()=>{
   .info{
     
   }
-  .btn{
+  .btns{
     width: 30%;
     display: flex;
     align-items: center;
