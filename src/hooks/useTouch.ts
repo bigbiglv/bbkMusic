@@ -13,14 +13,20 @@ export default function useTouch(el: HTMLElement) {
   //touch的状态
   const isTouch = ref(false);
   el?.addEventListener('touchstart', (e:TouchEvent)=>{
-    e.preventDefault()
+    // e.preventDefault()
     startX.value = e.touches[0].clientX;
     startY.value = e.touches[0].clientY;
-    isTouch.value = true;
   })
   el?.addEventListener('touchmove', (e)=>{
-    x.value = e.touches[0].clientX - startX.value;
-    y.value = e.touches[0].clientY - startY.value;
+    //偏移量大于20才算滑动
+    let X = e.touches[0].clientX - startX.value;
+    let Y = e.touches[0].clientY - startY.value;
+    if(isTouch.value) {
+      x.value = X
+      y.value = Y
+      return
+    }
+    if(Math.abs(X) > 20 || Math.abs(Y) > 20) isTouch.value = true;
   })
   el?.addEventListener('touchend', ()=>{
     startX.value = 0;

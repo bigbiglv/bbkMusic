@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import audioStore from '@/store/audioStore';
 import appStore from '@/store/appStore';
 import PlayerLyricsVue from '@/components/lyrics/index.vue';
+import useTouch from '@/hooks/useTouch';
 
 const storeAudio = audioStore();
 const storeApp = appStore();
@@ -18,10 +19,32 @@ function dragEnd(){
 const linePercent = computed(()=>{
   return (progress.value / duration.value * 100).toFixed(2)
 })
+
+const playBar = ref<HTMLElement | null>(null)
+onMounted(()=>{
+  console.log('onMounted',playBar)
+  const { x, isTouch } = useTouch(playBar.value)
+  watch([x, isTouch],()=>{
+    if(!isTouch.value){
+      if(x.value > 0){
+        //向左滑动执行下一曲
+        storeAudio.next()
+      }else{
+        //向右滑动执行上一曲
+        storeAudio.prev()
+      } 
+    }
+  })
+})
+
 </script>
 
 <template>
-  <div class="play-bar" :style="{height: `${playBarHeight}px`, bottom: `${playList.length ? tabBarHeight+'px' : '-100%'}`}">
+  <div 
+    class="play-bar" 
+    :style="{height: `${playBarHeight}px`, bottom: `${playList.length ? tabBarHeight+'px' : '-100%'}`}"
+    ref="playBar"
+  >
     <div class="cove">
       <img :src="playList[currentIndex]?.album.artist.img1v1Url" alt="封面">
     </div>
