@@ -15,13 +15,12 @@ const emit = defineEmits(['isDrag'])
 watch(lrcIndex,()=>{
   if(showLrcMask.value && !isMoveLrc.value) setLrcLoc()
 })
+const lrcList = ref<HTMLElement | null>(null)
 //设置当前歌词段落的位置
 function setLrcLoc(){
-  let list = document.getElementById('list')
-  let listHeight = list.offsetHeight
-  let id = `lyrRef${lrcIndex.value}`
-  let lyrRef = document.getElementById(id).offsetTop
-  list?.scrollTo({top:lyrRef-listHeight/2,behavior: "smooth"})
+  let listHeight = lrcList.value.offsetHeight
+  let lyrRef = lrcList.value.children[lrcIndex.value].offsetTop
+  lrcList.value?.scrollTo({top:lyrRef-listHeight/2,behavior: "smooth"})
 }
 //是否正在滑動歌詞
 const isMoveLrc = ref(false)
@@ -37,8 +36,8 @@ function handleTouchEndLrc(){
 
 <template>
   <div 
-    class="lyr" 
-    id="list"
+    class="lrc" 
+    ref="lrcList"
     @touchstart="handleTouchStartLrc"
     @touchend="handleTouchEndLrc"
   >
@@ -46,7 +45,6 @@ function handleTouchEndLrc(){
       v-for="(item,keys,index) in lrc" 
       :class="[index === lrcIndex  ? 'on' : '']"
       :key="keys" 
-      :id="'lyrRef' + index"
     >
       {{item}}
     </p>
@@ -55,7 +53,7 @@ function handleTouchEndLrc(){
 
 
 <style lang="scss" scoped>
-.lyr{
+.lrc{
   width: 80%;
   height: 80%;
   margin: 0 auto;

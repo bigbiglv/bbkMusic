@@ -14,10 +14,10 @@ function closeLrc(){
 const emit = defineEmits(['getPosOffsetY'])
 
 
-const offsetY =ref(0)
+const offsetY = ref(0)
+const dragBtn = ref<HTMLElement | null>(null)
 onMounted(() => {
-  const dragBtn = document.querySelector('.drag-btn')
-  const { y, isTouch } = useTouch(dragBtn)
+  const { y, isTouch } = useTouch(dragBtn.value)
   watch([y, isTouch],()=>{
     //滑动距离大于300就关闭
     if(y.value > 300 && !isTouch.value){
@@ -46,7 +46,7 @@ const rotateStyle = computed(()=>{
     <!-- 按住 -->
     <div 
       class="drag-btn"
-      id="dragBtn"
+      ref="dragBtn"
     >
       <icon-icon-park-twotone-format-brush />
       <!-- <icon-icon-park-solid-format-brush /> -->
