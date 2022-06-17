@@ -2,6 +2,7 @@
 import appStore from '@/store/appStore';
 import audioStore from '@/store/audioStore';
 import LyricsBar from '@/components/Lyrics/LyricsBar.vue';
+import LyricsPlayBar from '@/components/Lyrics/LyricsPlayBar.vue';
 import { storeToRefs } from 'pinia';
 import { watch, reactive, ref, computed } from 'vue';
 import { useDocumentVisibility } from '@vueuse/core'
@@ -104,6 +105,7 @@ function getPosOffsetY(val){
         {{item}}
       </p>
     </div>
+    <LyricsPlayBar />
   </div>
 </template>
 

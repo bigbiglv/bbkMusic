@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     IconPepiconsPausePrint: typeof import('~icons/pepicons/pause-print')['default']
     Lyrics: typeof import('./src/components/Lyrics/index.vue')['default']
     LyricsBar: typeof import('./src/components/Lyrics/LyricsBar.vue')['default']
+    LyricsPlayBar: typeof import('./src/components/Lyrics/LyricsPlayBar.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     PlayBar: typeof import('./src/components/Player/PlayBar.vue')['default']
     Player: typeof import('./src/components/Player/index.vue')['default']
