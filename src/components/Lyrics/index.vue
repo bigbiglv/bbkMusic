@@ -40,8 +40,8 @@ watch(visibility, (current, previous) => {
 const top = computed(()=>{
   if(showLrcMask.value){
     //滑动的偏移量超过20才动
-    if(posOffsetY.value < -20){
-      return -posOffsetY.value + 'px'
+    if(posOffsetY.value > 20){
+      return posOffsetY.value + 'px'
     }else{
       return '0'
     }
