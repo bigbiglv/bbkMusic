@@ -2,13 +2,15 @@
 import Tabbar from '@/components/Tabbar.vue';
 import Player from '@/components/Player/index.vue';
 import NavBar from '@/components/NavBar.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 </script>
 
 <template>
     <router-view>
       <template #default="{ Component, route }">
-        <NavBar />
+        <NavBar v-if="route.meta.navbar"/>
         <transition name="fade-slide" mode="out-in" appear>
           <component :is="Component" :key="route.fullPath"/>
         </transition>

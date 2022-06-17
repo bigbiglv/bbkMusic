@@ -9,6 +9,10 @@ interface IRoute {
     title: string
     keepAlive?: boolean
     tabbar?: boolean
+    navbar?:{
+      show?: boolean
+      search?: boolean
+    }
   }
   component: any
   children?: IRoute[]
@@ -29,7 +33,11 @@ export const routes: IRoute[] = [
     meta: {
       keepAlive: true,
       title: '首页',
-      tabbar: true
+      tabbar: true,
+      navbar: {
+        show: true,
+        search: true
+      }
     }
   },
   {
@@ -39,7 +47,10 @@ export const routes: IRoute[] = [
     meta: {
       keepAlive: true,
       title: '分类',
-      tabbar: true
+      tabbar: true,
+      navbar: {
+        show: true
+      }
     }
   },
   {

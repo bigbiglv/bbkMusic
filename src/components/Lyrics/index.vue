@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import appStore from '@/store/appStore';
 import audioStore from '@/store/audioStore';
+import LyricsBar from '@/components/Lyrics/LyricsBar.vue';
 import { storeToRefs } from 'pinia';
 import { watch, reactive, ref, computed } from 'vue';
 import { useDocumentVisibility } from '@vueuse/core'
@@ -101,6 +102,7 @@ function handleTouchEndLrc(){
 </script>
 
 <template>
+  
   <div 
     class="lyr-wrap" 
     :style="{top: top}"
@@ -108,6 +110,7 @@ function handleTouchEndLrc(){
     @touchmove="handleTouchMove($event)"
     @touchend="handleTouchEnd($event)"
   >
+    <LyricsBar/>
     <div 
       class="lyr-list" 
       id="list"
@@ -142,7 +145,7 @@ function handleTouchEndLrc(){
     margin: 0 auto;
     overflow-y: scroll;
     text-align: center;
-    ::-webkit-scrollbar{
+    &::-webkit-scrollbar{
       display: none;
     }
     .on{
