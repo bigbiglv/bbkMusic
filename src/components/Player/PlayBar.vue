@@ -8,13 +8,9 @@ import useTouch from '@/hooks/useTouch';
 
 const storeAudio = audioStore();
 const storeApp = appStore();
-const { isPause, showTime, showDuration, duration, progress, playList,currentIndex } = storeToRefs(storeAudio)
+const { isPause, duration, progress, playList,currentIndex } = storeToRefs(storeAudio)
 const { playBarHeight, tabBarHeight } = storeToRefs(storeApp)
 
-function dragEnd(){
-  storeAudio.isDrag = false
-  storeAudio.setProgress(progress.value)
-}
 //进度条百分比
 const linePercent = computed(()=>{
   return (progress.value / duration.value * 100).toFixed(2)
@@ -37,12 +33,19 @@ onMounted(()=>{
   })
 })
 
+const playBarStyle = computed(()=>{
+  return {
+    height: playBarHeight.value + 'px',
+    bottom: playList.value.length ? tabBarHeight.value + 'px' : '-100%'
+  }
+})
+
 </script>
 
 <template>
   <div 
     class="play-bar" 
-    :style="{height: `${playBarHeight}px`, bottom: `${playList.length ? tabBarHeight+'px' : '-100%'}`}"
+    :style="playBarStyle"
     ref="playBar"
   >
     <div class="cove">

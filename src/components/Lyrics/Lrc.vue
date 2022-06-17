@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import audioStore from '@/store/audioStore';
 import appStore from '@/store/appStore';
+import useTouch from '@/hooks/useTouch';
 
 const storeApp = appStore();
 const storeAudio = audioStore();
@@ -24,22 +25,20 @@ function setLrcLoc(){
 }
 //是否正在滑動歌詞
 const isMoveLrc = ref(false)
-function handleTouchStartLrc(){
-  isMoveLrc.value = true
-  emit('isDrag',isMoveLrc.value)
-}
-function handleTouchEndLrc(){
-  isMoveLrc.value = false
-  emit('isDrag',isMoveLrc.value)
-}
+onMounted(()=>{
+  const { isTouch } = useTouch(lrcList.value)
+  watch([isTouch],()=>{
+    isMoveLrc.value = isTouch.value 
+    emit('isDrag',isMoveLrc.value)
+  })
+})
+
 </script>
 
 <template>
   <div 
     class="lrc" 
     ref="lrcList"
-    @touchstart="handleTouchStartLrc"
-    @touchend="handleTouchEndLrc"
   >
     <p 
       v-for="(item,keys,index) in lrc" 
