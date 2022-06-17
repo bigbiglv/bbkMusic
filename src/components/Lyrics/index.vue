@@ -47,8 +47,9 @@ function setLrcLoc(){
 //歌词层top的位置
 const top = computed(()=>{
   if(showLrcMask.value){
-    if(position.offsetY < -20){
-      return -position.offsetY + 'px'
+    //滑动的偏移量超过20才动
+    if(posOffsetY.value < -20){
+      return -posOffsetY.value + 'px'
     }else{
       return '0'
     }
@@ -56,34 +57,7 @@ const top = computed(()=>{
     return '100%'
   }
 })
-interface IPos{
-  Y: number,
-  offsetY: number
-}
-//歌词层y轴的偏移量
-const position = reactive<IPos>({
-  Y: 0,
-  offsetY: 0
-})
 
-function handleTouchStart(e: TouchEvent){
-  // console.log('touchstart',e)
-  //阻止默认事件
-  e.preventDefault();
-  //初始化位置
-  position.Y = e.changedTouches[0].clientY;
-}
-function handleTouchEnd(e: TouchEvent){
-  //向下滑动 超过一定值就关闭歌词层
-  position.offsetY < -300 ? showLrcMask.value = false : ''  
-  position.offsetY = 0
-
-}
-function handleTouchMove(e: TouchEvent){
-  //偏差
-  let Y = e.changedTouches[0].clientY;
-  position.offsetY = position.Y - Y;
-}
 //是否正在滑動歌詞
 const isMoveLrc = ref(false)
 function handleTouchStartLrc(e: TouchEvent){
@@ -99,18 +73,21 @@ function handleTouchEndLrc(){
   isMoveLrc.value = false
   console.log('lrctouch')
 }
+const posOffsetY = ref(0)
+function getPosOffsetY(val){
+  posOffsetY.value = val
+}
 </script>
 
 <template>
   
   <div 
     class="lyr-wrap" 
+    :class="{transition: !posOffsetY}"
     :style="{top: top}"
-    @touchstart="handleTouchStart($event)"
-    @touchmove="handleTouchMove($event)"
-    @touchend="handleTouchEnd($event)"
+
   >
-    <LyricsBar/>
+    <LyricsBar @getPosOffsetY="getPosOffsetY"/>
     <div 
       class="lyr-list" 
       id="list"
@@ -138,7 +115,9 @@ function handleTouchEndLrc(){
   background-color: aliceblue;
   position: fixed;
   left: 0;
-  transition: .25s;
+  &.transition{
+    transition: .25s;
+  }
   .lyr-list{
     width: 80%;
     height: 80%;
