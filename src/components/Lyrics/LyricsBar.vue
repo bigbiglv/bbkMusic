@@ -2,13 +2,13 @@
 import audioStore from '@/store/audioStore';
 import { storeToRefs } from 'pinia';
 const storeAudio = audioStore();
-const { currentSong } = storeToRefs(storeAudio);
+const { playSong } = storeToRefs(storeAudio);
 </script>
 
 <template>
   <div class="navbar">
     <div>
-      {{currentSong.name}}
+      {{playSong.name}}
     </div>
     <!-- 按住 -->
     <div class="drag-btn">

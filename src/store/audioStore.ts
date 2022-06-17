@@ -23,7 +23,7 @@ export default defineStore('audioStore', {
   },
   getters: {
     //当前播放的歌曲信息
-    currentSong(state) {
+    playSong(state) {
       return state.playList.length > 0 ? state.playList[state.currentIndex] : {}
     },
     //显示的音频时间
