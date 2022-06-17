@@ -52,13 +52,13 @@ const top = computed(()=>{
 
 // 滑动的y轴偏移量
 const posOffsetY = ref(0)
-function getPosOffsetY(val){
-  posOffsetY.value = val
+function getPosOffsetY(y: number) {
+  posOffsetY.value = y
 }
 // 是否正在滑动歌词
 const isMoveLrc = ref(false)
-function getisDrag(val){
-  isMoveLrc.value = val
+function getisDrag(idDrag: boolean) {
+  isMoveLrc.value = idDrag
 }
 </script>
 
