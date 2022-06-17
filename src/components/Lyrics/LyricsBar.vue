@@ -1,11 +1,14 @@
 <script setup lang="ts">
-
+import audioStore from '@/store/audioStore';
+import { storeToRefs } from 'pinia';
+const storeAudio = audioStore();
+const { currentSong } = storeToRefs(storeAudio);
 </script>
 
 <template>
   <div class="navbar">
     <div>
-      title
+      {{currentSong.name}}
     </div>
     <!-- 按住 -->
     <div class="drag-btn">
@@ -23,6 +26,9 @@
   display:flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 10px;
+  padding: 10px 10px;
+  .drag-btn{
+    padding: 0 20px;
+  }
 }
 </style>
