@@ -58,7 +58,7 @@ function handleTouchMove(e: TouchEvent){
       <icon-icon-park-twotone-format-brush />
       <!-- <icon-icon-park-solid-format-brush /> -->
     </div>
-    <div class="close-btn" @click="closeLrc">
+    <div class="close-btn" @click="closeLrc" :style="{transform:`rotate(${position.offsetY}deg)`}">
       <icon-icon-park-twotone-coconut-tree />
     </div>
 
