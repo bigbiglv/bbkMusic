@@ -48,6 +48,7 @@ declare module '@vue/runtime-core' {
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
     VanEmpty: typeof import('vant/es')['Empty']
     VanField: typeof import('vant/es')['Field']
+    VanForm: typeof import('vant/es')['Form']
     VanPopup: typeof import('vant/es')['Popup']
     VanRate: typeof import('vant/es')['Rate']
     VanSearch: typeof import('vant/es')['Search']
