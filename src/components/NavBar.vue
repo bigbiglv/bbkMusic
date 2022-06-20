@@ -11,7 +11,7 @@ watch(route,()=>{
   setTimeout(() => {
     isTitleAnimate.value = false
   }, 900);
-})
+},{immediate:true})
 function go(path: string){
   router.push(path)
 }
