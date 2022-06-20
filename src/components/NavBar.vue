@@ -18,27 +18,16 @@ function go(path: string){
 </script>
 
 <template>
-  <div class="navbar">
-    <span :class="{shake: isTitleAnimate}">
+  <div class="container h-12 w-screen px-2 flex justify-between items-center bg-gray-100 rounded-sm">
+    <span :class="{shake: isTitleAnimate}" class="text-xl font-semibold tracking-wider">
       {{title}}
     </span>
-    <icon-icon-park-twotone-koala-bear  @click="go('/search')"/>
+    <icon-icon-park-twotone-koala-bear @click="go('/search')"/>
   </div>
 </template>
 
 
-<style lang="scss" scoped>
-.navbar{
-  font-size: 20px;
-  height: 50px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  background-color: aliceblue;
-}
+<style scoped>
 .shake {
   animation: shake 0.82s ;
 }
