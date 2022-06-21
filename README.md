@@ -18,7 +18,12 @@ npm run dev
 * `unplugin-vue-components` 组件自动引入
 * `unplugin-icons` [图标库](https://icones.js.org/)，按需自动引入 
 * `vant4` ui组件库，按需自动引入
+* `axios` 
 
+#### 接口
+`vite.config.ts`中设置接口代理
+* 前缀`api/`的是自己的接口
+* 前缀`api/wy`的是网易云音乐的接口
 
 #### git commit 规范
 
