@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import audioStore from '@/store/audioStore'; 
-import { useFetch } from '@vueuse/core'
+import { Search } from '@/api';
 
 const storeAudio = audioStore()
 
@@ -9,16 +9,20 @@ const storeAudio = audioStore()
 const searchValue = ref('陈奕迅')
 const songs = ref([])
 async function onSearch(){
-  console.log(searchValue.value)
-  let url = `http://localhost:3000/search?keywords=${searchValue.value}`
-  const { data } = await useFetch(url).json()
-  songs.value = data.value.result.songs || []
+  try {
+    const { result } = await Search({keywords:searchValue.value})
+    songs.value = result.songs || []
+  } catch (error) {
+    console.log(error)
+  }
 }
 onSearch()
 //添加到播放列表
 function addPlayList(song: object){
   storeAudio.addPlayList(song)
 }
+
+
 </script>
 
 <template>
