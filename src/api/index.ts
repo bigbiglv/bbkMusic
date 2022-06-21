@@ -15,7 +15,8 @@ namespace Login {
   }
   // 登录成功后返回的token
   export interface LoginResData {
-    token: string;
+    token: string
+    userinfo: object
   }
 }
 // 用户登录
@@ -32,6 +33,7 @@ namespace Search {
   // 登录成功后返回的token
   export interface SearchResData {
     result: Array<object>
+    code: number
   }
 }
 // 用户登录
