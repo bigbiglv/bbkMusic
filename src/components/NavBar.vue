@@ -19,9 +19,9 @@ function go(path: string){
 
 <template>
   <div class="container h-12 w-screen px-2 flex justify-between items-center bg-gray-100 rounded-sm">
-    <span :class="{shake: isTitleAnimate}" class="text-xl font-semibold tracking-wider">
+    <h1 :class="{shake: isTitleAnimate}" class="text-xl font-semibold tracking-wider">
       {{title}}
-    </span>
+    </h1>
     <icon-icon-park-twotone-koala-bear @click="go('/search')"/>
   </div>
 </template>
