@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
-
+import { UserInfo } from '@/api'
+UserInfo().then(res => {
+  console.log(res)
+}).catch(err => {
+  console.log('err',err)
+})
 </script>
 
 <template>

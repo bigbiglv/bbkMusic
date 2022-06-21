@@ -30,14 +30,24 @@ namespace Search {
   export interface SearchReqForm {
     keywords: string
   }
-  // 登录成功后返回的token
   export interface SearchResData {
     result: Array<object>
     code: number
   }
 }
-// 用户登录
 export const Search = (params: Search.SearchReqForm) => {
     // 返回的数据格式可以和服务端约定
     return axios.get<Search.SearchResData>('/wy/search', params);
+}
+
+// 用户信息
+namespace UserInfo {
+  export interface UserInfoResData {
+    result: Array<object>
+    code: number
+  }
+}
+export const UserInfo = () => {
+  // 返回的数据格式可以和服务端约定
+  return axios.get<UserInfo.UserInfoResData>('/user/userinfo');
 }

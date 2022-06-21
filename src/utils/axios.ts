@@ -13,9 +13,9 @@ interface ResultData<T = any> extends Result {
 }
 const URL: string = '/api'
 enum RequestEnums {
-  TIMEOUT = 20000,
-  OVERDUE = 600, // 登录失效
-  FAIL = 999, // 请求失败
+  TIMEOUT = 5000,
+  OVERDUE = 401, // 登录失效
+  FAIL = 404, // 请求失败
   SUCCESS = 200, // 请求成功
 }
 const config = {
@@ -45,7 +45,7 @@ class RequestHttp {
          return {
             ...config,
             headers: {
-              'x-access-token': token, // 请求头中携带token信息
+              'Authorization': `Bearer ${token}`, // 请求头中携带token信息
             }
          }
        },
@@ -65,9 +65,7 @@ class RequestHttp {
          if (data.code === RequestEnums.OVERDUE) {
             // 登录信息失效，应跳转到登录页面，并清空本地的token
             localStorage.setItem('token', '');
-            // router.replace({
-            //   path: '/login'
-            // })
+            console.log('登录失效')
             return Promise.reject(data);
          }
          // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
