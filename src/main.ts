@@ -8,7 +8,7 @@ import './index.css'
 import 'vant/lib/index.css'
 import { Toast } from 'vant'
 import { useVibrate } from '@vueuse/core'
-const { vibrate} = useVibrate({ pattern: 100 })
+const { vibrate} = useVibrate({ pattern: 30 })
 const app = createApp(App) 
 
 app.directive('title',  {
@@ -21,9 +21,8 @@ app.directive('title',  {
         time++
         if(time === 2){
           e.preventDefault() 
-          Toast(value)
+          if(value) Toast(value) 
           vibrate()
-          console.log('长按')
         }
       },1000)
     })  
