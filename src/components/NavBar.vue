@@ -22,7 +22,7 @@ function go(path: string){
     <h1 :class="{shake: isTitleAnimate}" class="text-xl font-semibold tracking-wider">
       {{title}}
     </h1>
-    <icon-icon-park-twotone-koala-bear @click="go('/search')"/>
+    <icon-icon-park-twotone-koala-bear @click="go('/search')" v-title="'搜索'"/>
   </div>
 </template>
 

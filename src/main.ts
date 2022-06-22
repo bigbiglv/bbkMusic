@@ -6,7 +6,36 @@ import { createPinia } from 'pinia'
 //index.css
 import './index.css'
 import 'vant/lib/index.css'
+import { Toast } from 'vant'
+import { useVibrate } from '@vueuse/core'
+const { vibrate} = useVibrate({ pattern: 100 })
 const app = createApp(App) 
+
+app.directive('title',  {
+  mounted(el:HTMLElement, binding){
+    let value = binding.value
+    let time = 0
+    let timer : NodeJS.Timer
+    el.addEventListener('touchstart',(e: TouchEvent)=>{
+      timer = setInterval(()=>{
+        time++
+        if(time === 2){
+          e.preventDefault() 
+          Toast(value)
+          vibrate()
+          console.log('长按')
+        }
+      },1000)
+    })  
+    el.addEventListener('touchend',()=>{
+      clearInterval(timer)
+      time = 0
+    })
+  }
+})
+
+
+
 app.use(createPinia())
 app.use(router)
 app.mount('#app')
