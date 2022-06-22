@@ -18,7 +18,7 @@ function go(path: string){
 </script>
 
 <template>
-  <div class="container h-12 w-screen px-2 flex justify-between items-center bg-gray-100 rounded-sm box-border">
+  <div class="h-12 w-screen px-2 flex justify-between items-center bg-gray-100 rounded-sm box-border">
     <h1 :class="{shake: isTitleAnimate}" class="text-xl font-semibold tracking-wider">
       {{title}}
     </h1>

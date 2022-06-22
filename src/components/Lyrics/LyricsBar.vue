@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import audioStore from '@/store/audioStore';
-import appStore from '@/store/appStore';
-import { reactive, ref, watch, onMounted, computed } from 'vue';
-import { storeToRefs } from 'pinia';
-import useTouch from '@/hooks/useTouch';
-const storeAudio = audioStore();
-const storeApp = appStore();
-const { playSong } = storeToRefs(storeAudio);
-const { showLrcMask } = storeToRefs(storeApp);
+import audioStore from '@/store/audioStore'
+import appStore from '@/store/appStore'
+import { ref, watch, onMounted, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import useTouch from '@/hooks/useTouch'
+const storeAudio = audioStore()
+const storeApp = appStore()
+const { playSong } = storeToRefs(storeAudio)
+const { showLrcMask } = storeToRefs(storeApp)
 function closeLrc(){
   showLrcMask.value = false
 }
@@ -39,13 +39,13 @@ const rotateStyle = computed(()=>{
 </script>
 
 <template>
-  <div class="flex justify-between items-center p-2">
-    <div>
+  <div class="flex justify-between items-center p-2 relative">
+    <div class="w-40">
       {{playSong.name}}
     </div>
     <!-- 按住 -->
     <div 
-      class="p-4"
+      class="px-4"
       ref="dragBtn"
     >
       <icon-icon-park-twotone-format-brush />
