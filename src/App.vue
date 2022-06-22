@@ -19,7 +19,7 @@ const paddingBottom = computed(()=>{
       <template #default="{ Component, route }">
         <NavBar v-if="route.meta.navbar"/>
         <transition name="fade-slide" mode="out-in" appear>
-          <component :is="Component" :key="route.fullPath" :style="paddingBottom" style="background-color: #ff0;"/>
+          <component :is="Component" :key="route.fullPath" :style="paddingBottom" />
         </transition>
       </template>
     </router-view>
