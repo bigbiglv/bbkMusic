@@ -18,7 +18,6 @@ const linePercent = computed(()=>{
 
 const playBar = ref<HTMLElement | null>(null)
 onMounted(()=>{
-  console.log('onMounted',playBar)
   const { x, isTouch } = useTouch(playBar.value)
   watch([x, isTouch],()=>{
     if(!isTouch.value){
