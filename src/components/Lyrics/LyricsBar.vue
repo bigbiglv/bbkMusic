@@ -17,7 +17,7 @@ const emit = defineEmits(['getPosOffsetY'])
 const offsetY = ref(0)
 const dragBtn = ref<HTMLElement | null>(null)
 onMounted(() => {
-  const { y, isTouch } = useTouch(dragBtn.value)
+  const { y, isTouch } = useTouch(dragBtn.value as HTMLElement)
   watch([y, isTouch],()=>{
     //滑动距离大于300就关闭
     if(y.value > 300 && !isTouch.value){
@@ -51,7 +51,7 @@ const rotateStyle = computed(()=>{
       <icon-icon-park-twotone-format-brush />
       <!-- <icon-icon-park-solid-format-brush /> -->
     </div>
-    <div class="" @click="closeLrc" :style="rotateStyle">
+    <div class="" @click="closeLrc" :style="rotateStyle" v-title="'关闭'">
       <icon-icon-park-twotone-coconut-tree />
     </div>
 

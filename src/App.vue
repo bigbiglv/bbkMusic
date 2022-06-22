@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import Tabbar from '@/components/Tabbar.vue';
-import Player from '@/components/Player/index.vue';
+import Tabbar from '@/components/Tabbar.vue'
+import Player from '@/components/Player/index.vue'
 import NavBar from '@/components/NavBar.vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
+import { computed } from 'vue';
+import { storeToRefs } from 'pinia'
+import appStore from '@/store/appStore'
+const storeApp = appStore()
+const { playBarHeight, tabBarHeight } = storeToRefs(storeApp)
+const paddingBottom = computed(()=>{
+  return `padding-bottom: ${playBarHeight.value + tabBarHeight.value}px`
+})
+
 
 </script>
 
@@ -12,7 +19,7 @@ const route = useRoute()
       <template #default="{ Component, route }">
         <NavBar v-if="route.meta.navbar"/>
         <transition name="fade-slide" mode="out-in" appear>
-          <component :is="Component" :key="route.fullPath"/>
+          <component :is="Component" :key="route.fullPath" :style="paddingBottom" style="background-color: #ff0;"/>
         </transition>
       </template>
     </router-view>
