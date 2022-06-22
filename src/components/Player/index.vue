@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import audioStore from '@/store/audioStore'
 
 const store = audioStore()
-let { audioEl, currentIndex, isLoop } = storeToRefs(store)
+let { audioEl, isLoop } = storeToRefs(store)
 
 
 onMounted(() => {

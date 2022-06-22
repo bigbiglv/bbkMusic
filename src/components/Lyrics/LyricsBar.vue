@@ -39,19 +39,19 @@ const rotateStyle = computed(()=>{
 </script>
 
 <template>
-  <div class="navbar">
+  <div class="flex justify-between items-center p-2">
     <div>
       {{playSong.name}}
     </div>
     <!-- 按住 -->
     <div 
-      class="drag-btn"
+      class="p-4"
       ref="dragBtn"
     >
       <icon-icon-park-twotone-format-brush />
       <!-- <icon-icon-park-solid-format-brush /> -->
     </div>
-    <div class="close-btn" @click="closeLrc" :style="rotateStyle">
+    <div class="" @click="closeLrc" :style="rotateStyle">
       <icon-icon-park-twotone-coconut-tree />
     </div>
 
@@ -60,13 +60,4 @@ const rotateStyle = computed(()=>{
 
 
 <style lang="scss" scoped>
-.navbar{
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 10px;
-  .drag-btn{
-    padding: 0 20px;
-  }
-}
 </style>

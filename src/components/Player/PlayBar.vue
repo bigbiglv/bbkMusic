@@ -44,17 +44,17 @@ const playBarStyle = computed(()=>{
 
 <template>
   <div 
-    class="play-bar" 
+    class="w-screen fixed left-0 px-1 box-border flex justify-between items-center duration-200 bg-gray-100" 
     :style="playBarStyle"
     ref="playBar"
   >
-    <div class="cove">
-      <img :src="playList[currentIndex]?.album.artist.img1v1Url" alt="封面">
+    <div class="w-10 h-10">
+      <img class="w-full h-full" :src="playList[currentIndex]?.album.artist.img1v1Url" alt="封面">
     </div>
     <div class="info" @click="storeApp.showLrcMask = true">
       {{playList[currentIndex]?.name}}
     </div>
-    <div class="btns">
+    <div class="btns w-1/3 flex justify-between items-center text-3xl">
 
       <icon-ic-twotone-skip-previous @click="storeAudio.prev"/>
 
@@ -64,8 +64,8 @@ const playBarStyle = computed(()=>{
       <icon-ic-twotone-skip-next @click="storeAudio.next"/>
 
     </div>
-    <div class="line">
-      <div class="progress" :style="{ width: `${linePercent}%` }"></div>
+    <div class="w-screen h-px absolute left-0 bottom-0 bg-gray-100">
+      <div class="progress h-full absolute left-0 bottom-0 duration-200" :style="{ width: `${linePercent}%` }"></div>
     </div>
     <!-- {{showTime}}
     <van-slider 
@@ -82,51 +82,10 @@ const playBarStyle = computed(()=>{
 
 
 <style lang="scss" scoped>
-.play-bar{
-  width: 100%;
-  position: fixed;
-  left: 0;
-  padding: 0 15px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: $yueyingbai;
-  transition: .25s;
-  .cove{
-    width: 40px;
-    height: 40px;
-    img{
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .info{
-    
-  }
-  .btns{
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 32px;
-    color: $hiwanglv;
-  }
-  .line{
-    width: 100%;
-    height: 1px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: #eee;
-    .progress{
-      height: 100%;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      background-color: $hiwanglv;
-      transition: .25s;
-    }
-  }
+.btns{
+  color: $hiwanglv;
+}
+.progress{
+  background-color: $hiwanglv;
 }
 </style>

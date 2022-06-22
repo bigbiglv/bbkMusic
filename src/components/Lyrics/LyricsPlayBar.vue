@@ -27,7 +27,7 @@ const isShowList = ref(false)
     {{showDuration}}
   </div>
 </div>
-  <div class="btns">
+  <div class="btns w-full flex justify-center items-center text-3xl">
     
     <icon-ic-twotone-skip-previous @click="storeAudio.prev"/>
 
@@ -57,11 +57,6 @@ const isShowList = ref(false)
 
 <style lang="scss" scoped>
 .btns{
-   width: 100%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   font-size: 32px;
-   color: $hiwanglv;
+  color: $hiwanglv;
 }
 </style>

@@ -37,7 +37,7 @@ onMounted(()=>{
 
 <template>
   <div 
-    class="lrc" 
+    class="w-5/6 h-4/5 text-center overflow-y-scroll mx-auto" 
     ref="lrcList"
   >
     <p 
@@ -52,19 +52,9 @@ onMounted(()=>{
 
 
 <style lang="scss" scoped>
-.lrc{
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-  overflow-y: scroll;
-  text-align: center;
-  &::-webkit-scrollbar{
-    display: none;
-  }
-  .on{
-    color: $hiwanglv;
-    font-size: 18px;
-    transition: .25s;
-  }
+.on{
+  color: $hiwanglv;
+  font-size: 18px;
+  transition: .25s;
 }
 </style>

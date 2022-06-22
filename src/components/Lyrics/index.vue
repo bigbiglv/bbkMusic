@@ -5,7 +5,7 @@ import LyricsBar from '@/components/Lyrics/LyricsBar.vue';
 import LyricsPlayBar from '@/components/Lyrics/LyricsPlayBar.vue';
 import Lrc from '@/components/Lyrics/Lrc.vue';
 import { storeToRefs } from 'pinia';
-import { watch, reactive, ref, computed } from 'vue';
+import { watch, ref, computed } from 'vue';
 import { useDocumentVisibility } from '@vueuse/core'
 const storeApp = appStore();
 const storeAudio = audioStore();
@@ -64,8 +64,8 @@ function getisDrag(idDrag: boolean) {
 
 <template>
   <div 
-    class="lyr-wrap" 
-    :class="{transition: !posOffsetY}"
+    class="w-full h-full bg-gray-200 fixed left-0" 
+    :class="{'duration-200': !posOffsetY}"
     :style="{top: top}"
   >
     <LyricsBar @getPosOffsetY="getPosOffsetY"/>
@@ -76,15 +76,4 @@ function getisDrag(idDrag: boolean) {
 
 
 <style lang="scss" scoped>
-.lyr-wrap{
-  width: 100%;
-  height: 100%;
-  background-color: aliceblue;
-  position: fixed;
-  left: 0;
-  &.transition{
-    transition: .25s;
-  }
-
-}
 </style>
