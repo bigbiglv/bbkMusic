@@ -48,6 +48,9 @@ async function onSubmit(){
           <van-button round block type="primary" native-type="submit" :loading="loading">
             登录
           </van-button>
+          <van-button round block type="primary" to="/register" style="margin-top: 10px;">
+            去注册
+          </van-button>
         </div>
       </van-form>
     </div>

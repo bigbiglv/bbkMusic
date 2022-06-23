@@ -51,3 +51,16 @@ export const UserInfo = () => {
   // 返回的数据格式可以和服务端约定
   return axios.get<UserInfo.UserInfoResData>('/user/userinfo');
 }
+
+//注册
+namespace Register {
+  export interface RegisterReqForm {
+    username: string;
+    password: string;
+    email?: string;
+    phone?: string;
+  }
+}
+export const Register = (params: Register.RegisterReqForm) => {
+  return axios.post('/user/register', params);
+}

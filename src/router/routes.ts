@@ -63,6 +63,15 @@ export const routes: IRoute[] = [
     }
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/Register/index.vue'),
+    meta: {
+      keepAlive: true,
+      title: '注册'
+    }
+  },
+  {
     path: '/search',
     name: 'search',
     component: () => import('@/views/Search/index.vue'),
