@@ -25,6 +25,10 @@ npm run dev
 * 前缀`api/`的是自己的接口
 * 前缀`api/wy`的是网易云音乐的接口
 
+#### 自定义指令
+存放在`src/directive`中，新建文件自动导入
+* `v-title`:长按显示传入的value，多用于图标按钮
+
 #### git commit 规范
 
 - `feat` 增加新功能
