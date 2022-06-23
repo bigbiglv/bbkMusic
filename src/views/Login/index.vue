@@ -12,10 +12,8 @@ async function onSubmit(){
   loading.value = true
   try{
     const { result } = await Login({username:username.value,password:password.value})
-    console.log(result)
-    localStorage.setItem('token',result.token)
+    localStorage.setItem('token',result?.token ?? '')
     router.replace('/')
-
   }catch(error){
     console.log(error)
   }

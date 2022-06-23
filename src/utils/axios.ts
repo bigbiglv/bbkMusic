@@ -1,16 +1,16 @@
 import axios, {AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios'
 import { Toast } from 'vant'
-// import {ElMessage} from 'element-plus'
 // 数据返回的接口
-// 定义请求响应参数，不含data
+// 定义请求响应参数类型，不含data或result
 interface Result {
   code: number
   msg: string
 }
 
-// 请求响应参数，包含data
+// 请求响应参数，包含data或result
 interface ResultData<T = any> extends Result {
-  data?: T
+  data?: T,
+  result?: T
 }
 const URL: string = '/api'
 enum RequestEnums {
@@ -21,7 +21,7 @@ enum RequestEnums {
 }
 const config = {
   // 默认地址
-  baseURL: URL as string,
+  baseURL: URL,
   // 设置超时时间
   timeout: RequestEnums.TIMEOUT as number,
   // 跨域时候允许携带凭证
@@ -69,10 +69,9 @@ class RequestHttp {
              Toast.fail('登录信息已失效，请重新登录')
              return Promise.reject(data)
           }
-          if(data.code === 500) Toast.fail(data.msg)
           // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
           if (data.code && data.code !== RequestEnums.SUCCESS) {
-             // ElMessage.error(data) // 此处也可以使用组件提示报错信息
+             Toast.fail(data.msg)
              return Promise.reject(data)
           }
           return data
