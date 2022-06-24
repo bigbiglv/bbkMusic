@@ -1,4 +1,5 @@
 import axios from '@/utils/axios'
+import { Tsong } from '@/types/audio';
 
 // test
 export const test = () => {
@@ -31,8 +32,9 @@ namespace Search {
     keywords: string
   }
   export interface SearchResData {
-    result: Array<object>
-    code: number
+    songs: Tsong[],
+    hasMore: boolean,
+    songCount: number
   }
 }
 export const Search = (params: Search.SearchReqForm) => {

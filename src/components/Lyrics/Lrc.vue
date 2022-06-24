@@ -14,23 +14,30 @@ const { lrc, lrcIndex } = storeToRefs(storeAudio);
 const emit = defineEmits(['isDrag'])
 //监听歌词变化
 watch(lrcIndex,()=>{
+  if(!lrcList.value) return
   if(showLrcMask.value && !isMoveLrc.value) setLrcLoc()
 })
 const lrcList = ref<HTMLElement | null>(null)
 //设置当前歌词段落的位置
 function setLrcLoc(){
+  if(!lrcList.value) return
   let listHeight = lrcList.value.offsetHeight
-  let lyrRef = lrcList.value.children[lrcIndex.value].offsetTop
-  lrcList.value?.scrollTo({top:lyrRef-listHeight/2,behavior: "smooth"})
+  let lyrRef = lrcList.value.children[lrcIndex.value] as HTMLElement
+  lrcList.value.scrollTo({
+    top:lyrRef.offsetTop - listHeight / 2,
+    behavior: "smooth"
+  })
 }
 //是否正在滑動歌詞
 const isMoveLrc = ref(false)
 onMounted(()=>{
-  const { isTouch } = useTouch(lrcList.value)
-  watch([isTouch],()=>{
-    isMoveLrc.value = isTouch.value 
-    emit('isDrag',isMoveLrc.value)
-  })
+  if( lrcList.value ){
+    const { isTouch } = useTouch(lrcList.value)
+    watch([isTouch],()=>{
+      isMoveLrc.value = isTouch.value 
+      emit('isDrag',isMoveLrc.value)
+    })
+  }
 })
 
 </script>

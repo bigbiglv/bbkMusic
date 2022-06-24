@@ -1,7 +1,7 @@
 /*
 * 秒格式的时间转为 xx:xx:xx格式
 */
-export const formatSeconds = (seconds: number) => {
+export const formatSeconds = (seconds: number) : string => {
   let time = ''
   let hour = Math.floor(seconds / 3600)
   let minute = Math.floor((seconds % 3600) / 60)
@@ -28,10 +28,10 @@ export const formatSeconds = (seconds: number) => {
 /*
 * 格式化歌词数组
 */ 
-export const formatLrc = (lrc: string) => {
-  interface Ilrc {
-    [key : string]: string
-  }
+interface Ilrc {
+  [key : string]: string
+}
+export const formatLrc = (lrc: string) : Ilrc => {
   let lrcArr = lrc.split('\n')
   let lrcObj: Ilrc = {}
   lrcArr.forEach(item => {

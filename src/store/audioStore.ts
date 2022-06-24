@@ -2,33 +2,14 @@ import { defineStore } from 'pinia'
 import { formatSeconds,formatLrc } from '@/utils'
 import { useFetch } from '@vueuse/core'
 import appStore from './appStore'
-type Tlyric = {
-  lrc: Tlrc
-}
-type Tlrc = {
-  lyric: string,
-  version: number,
-}
-type TplayList = {
-  id: number,
-  name: string,
-  artists: Array<object>
-  album: object
-} 
-type TcurrentSong = {
-  id: number,
-  br: number,
-  encodeType: string,
-  size: number,
-  type: string,
-  url: string,
-}
+import { Tsong, TcurrentSong, Tlyric } from '@/types/audio'
+
 export default defineStore('audioStore', {
   state: () => {
     return {
       audioEl: null as HTMLAudioElement | null,
       isPause: true,   //是否暂停
-      playList: [] as Array<TplayList>,  //播放列表
+      playList: [] as Tsong[] | [],  //播放列表
       currentSong: {} as TcurrentSong, //当前播放的歌曲
       currentIndex: 0, //当前播放的音乐的下标
       duration: 0,     //当前播放音乐的总时长
@@ -43,8 +24,8 @@ export default defineStore('audioStore', {
   },
   getters: {
     //当前播放的歌曲信息
-    playSong(state) {
-      return state.playList.length > 0 ? state.playList[state.currentIndex] : {}
+    playSong(state): Tsong | undefined {
+      return state.playList.length > 0 ? state.playList[state.currentIndex] : undefined
     },
     //显示的音频时间
     showTime(state): string {
@@ -61,8 +42,8 @@ export default defineStore('audioStore', {
   },
   actions:{
     //添加播放列表
-    addPlayList(obj: TplayList){
-      this.playList.push(obj)
+    addPlayList(obj: Tsong){
+      this.playList = [...this.playList, obj]
       //播放刚添加的歌曲
       this.playByIndex(this.playList.length - 1)
 

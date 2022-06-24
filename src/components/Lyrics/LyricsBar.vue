@@ -41,7 +41,7 @@ const rotateStyle = computed(()=>{
 <template>
   <div class="flex justify-between items-center p-2 relative">
     <div class="w-40">
-      {{playSong.name}}
+      {{playSong?.name ? playSong.name : '歌曲名称'}}
     </div>
     <!-- 按住 -->
     <div 
