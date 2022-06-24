@@ -2,6 +2,7 @@ import Home from '@/views/Home/index.vue'
 import Category from '@/views/Category/index.vue'
 import NotFound from '@/views/Error/404.vue'
 import Login from '@/views/Login/index.vue'
+import User from '@/views/User/index.vue'
 interface IRoute {
   path: string
   name: string
@@ -47,6 +48,19 @@ export const routes: IRoute[] = [
     meta: {
       keepAlive: true,
       title: '分类',
+      tabbar: true,
+      navbar: {
+        show: true
+      }
+    }
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: User,
+    meta: {
+      keepAlive: true,
+      title: '我的',
       tabbar: true,
       navbar: {
         show: true
