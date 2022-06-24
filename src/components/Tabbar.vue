@@ -32,7 +32,7 @@ watch(route,(val)=>{
     >
       <icon-icon-park-twotone-home v-if="index === 0"/>
       <icon-icon-park-twotone-category-management v-if="index === 1"/>
-      {{item.name}}
+      {{item.meta?.title ? item.meta?.title : '---'}}
     </div>
   </div>
 </template>

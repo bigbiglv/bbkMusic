@@ -1,11 +1,6 @@
 import axios from '@/utils/axios'
 import { Tsong } from '@/types/audio';
 
-// test
-export const test = () => {
-    // 返回的数据格式可以和服务端约定
-    return axios.get('/');
-}
 
 //登录
 namespace Login {
@@ -45,8 +40,11 @@ export const Search = (params: Search.SearchReqForm) => {
 // 用户信息
 namespace UserInfo {
   export interface UserInfoResData {
-    result: Array<object>
-    code: number
+    avatar: string,
+    nickname: string,
+    id: number,
+    email: string,
+    phone: string,
   }
 }
 export const UserInfo = () => {
